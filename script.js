@@ -51,6 +51,9 @@ if (newsletterForm) {
 function createConfetti(element) {
     const colors = ['#DC143C', '#00ff41', '#ffffff'];
     const confettiCount = 30;
+    const rect = element.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
     
     for (let i = 0; i < confettiCount; i++) {
         const confetti = document.createElement('div');
@@ -58,8 +61,8 @@ function createConfetti(element) {
         confetti.style.width = '10px';
         confetti.style.height = '10px';
         confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        confetti.style.left = element.offsetLeft + element.offsetWidth / 2 + 'px';
-        confetti.style.top = element.offsetTop + element.offsetHeight / 2 + 'px';
+        confetti.style.left = centerX + 'px';
+        confetti.style.top = centerY + 'px';
         confetti.style.borderRadius = '50%';
         confetti.style.pointerEvents = 'none';
         confetti.style.zIndex = '10000';
@@ -107,7 +110,7 @@ window.addEventListener('scroll', () => {
             
             if (heroContent && currentScroll < window.innerHeight) {
                 heroContent.style.transform = `translateY(${currentScroll * 0.5}px)`;
-                heroContent.style.opacity = 1 - (currentScroll / window.innerHeight) * 1.5;
+                heroContent.style.opacity = Math.max(0, 1 - (currentScroll / window.innerHeight) * 1.5);
             }
             
             if (heroBg && currentScroll < window.innerHeight) {
@@ -134,12 +137,13 @@ const observerOptions = {
 };
 
 const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, index) => {
+    entries.forEach((entry) => {
         if (entry.isIntersecting) {
+            const staggerIndex = parseInt(entry.target.dataset.staggerIndex) || 0;
             setTimeout(() => {
                 entry.target.style.opacity = '1';
                 entry.target.style.transform = 'translateY(0)';
-            }, index * 100);
+            }, staggerIndex * 100);
             observer.unobserve(entry.target);
         }
     });
@@ -150,6 +154,7 @@ document.querySelectorAll('.team-card, .news-card, .stat-item, .partner-logo').f
     el.style.opacity = '0';
     el.style.transform = 'translateY(30px)';
     el.style.transition = 'opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+    el.dataset.staggerIndex = index;
     observer.observe(el);
 });
 
