@@ -17,11 +17,27 @@ const newsletterForm = document.querySelector('.newsletter-form');
 if (newsletterForm) {
     newsletterForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        const email = this.querySelector('input[type="email"]').value;
+        const emailInput = this.querySelector('input[type="email"]');
+        const email = emailInput.value;
+        const submitBtn = this.querySelector('button');
         
-        // Show success message
-        alert('Thank you for subscribing! We\'ll keep you updated with the latest ROSO Esports news.');
+        // Show success feedback
+        const originalBtnText = submitBtn.textContent;
+        submitBtn.textContent = '✓ Subscribed!';
+        submitBtn.style.background = 'var(--primary-green)';
+        submitBtn.style.color = 'var(--primary-black)';
+        
+        // In a production environment, send email to backend:
+        // fetch('/api/subscribe', { method: 'POST', body: JSON.stringify({ email }) });
+        
         this.reset();
+        
+        // Reset button after 3 seconds
+        setTimeout(() => {
+            submitBtn.textContent = originalBtnText;
+            submitBtn.style.background = '';
+            submitBtn.style.color = '';
+        }, 3000);
     });
 }
 
