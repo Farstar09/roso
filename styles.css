@@ -572,6 +572,7 @@ section {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
+    perspective: 1000px;
 }
 
 .team-card {
@@ -584,7 +585,6 @@ section {
     position: relative;
     overflow: hidden;
     transform-style: preserve-3d;
-    perspective: 1000px;
 }
 
 .team-card::before {

@@ -80,37 +80,45 @@ function createConfetti(element) {
     }
 }
 
-// Navbar scroll effect with parallax
+// Navbar scroll effect with parallax - combined into single listener
 let lastScroll = 0;
 const navbar = document.querySelector('.navbar');
 
-window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-    
-    if (currentScroll <= 0) {
-        navbar.style.boxShadow = 'none';
-        navbar.style.background = 'rgba(10, 10, 10, 0.95)';
-    } else {
-        navbar.style.boxShadow = '0 4px 20px rgba(220, 20, 60, 0.3)';
-        navbar.style.background = 'rgba(10, 10, 10, 0.98)';
-    }
-    
-    lastScroll = currentScroll;
-});
+// Throttle scroll events for better performance
+let ticking = false;
 
-// Parallax effect for hero section
 window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const heroContent = document.querySelector('.hero-content');
-    const heroBg = document.querySelector('.hero-bg');
-    
-    if (heroContent && scrolled < window.innerHeight) {
-        heroContent.style.transform = `translateY(${scrolled * 0.5}px)`;
-        heroContent.style.opacity = 1 - (scrolled / window.innerHeight) * 1.5;
-    }
-    
-    if (heroBg && scrolled < window.innerHeight) {
-        heroBg.style.transform = `translateY(${scrolled * 0.3}px)`;
+    if (!ticking) {
+        window.requestAnimationFrame(() => {
+            const currentScroll = window.pageYOffset;
+            
+            // Navbar effects
+            if (currentScroll <= 0) {
+                navbar.style.boxShadow = 'none';
+                navbar.style.background = 'rgba(10, 10, 10, 0.95)';
+            } else {
+                navbar.style.boxShadow = '0 4px 20px rgba(220, 20, 60, 0.3)';
+                navbar.style.background = 'rgba(10, 10, 10, 0.98)';
+            }
+            
+            // Parallax effect for hero section
+            const heroContent = document.querySelector('.hero-content');
+            const heroBg = document.querySelector('.hero-bg');
+            
+            if (heroContent && currentScroll < window.innerHeight) {
+                heroContent.style.transform = `translateY(${currentScroll * 0.5}px)`;
+                heroContent.style.opacity = 1 - (currentScroll / window.innerHeight) * 1.5;
+            }
+            
+            if (heroBg && currentScroll < window.innerHeight) {
+                heroBg.style.transform = `translateY(${currentScroll * 0.3}px)`;
+            }
+            
+            lastScroll = currentScroll;
+            ticking = false;
+        });
+        
+        ticking = true;
     }
 });
 
@@ -146,7 +154,7 @@ document.querySelectorAll('.team-card, .news-card, .stat-item, .partner-logo').f
 });
 
 // Animated counter for stats
-const animateCounter = (element, target, duration = 2000) => {
+const animateCounter = (element, target, hasPlus, duration = 2000) => {
     const start = 0;
     const increment = target / (duration / 16);
     let current = start;
@@ -154,10 +162,10 @@ const animateCounter = (element, target, duration = 2000) => {
     const timer = setInterval(() => {
         current += increment;
         if (current >= target) {
-            element.textContent = target + (element.textContent.includes('+') ? '+' : '');
+            element.textContent = target + (hasPlus ? '+' : '');
             clearInterval(timer);
         } else {
-            element.textContent = Math.floor(current) + (element.textContent.includes('+') ? '+' : '');
+            element.textContent = Math.floor(current) + (hasPlus ? '+' : '');
         }
     }, 16);
 };
@@ -173,7 +181,7 @@ const statObserver = new IntersectionObserver((entries) => {
             
             statNumber.textContent = '0' + (hasPlus ? '+' : '');
             setTimeout(() => {
-                animateCounter(statNumber, number);
+                animateCounter(statNumber, number, hasPlus);
             }, 300);
             
             statObserver.unobserve(entry.target);
@@ -221,29 +229,28 @@ floatStyle.textContent = `
 `;
 document.head.appendChild(floatStyle);
 
-// Cursor trail effect
-const cursorTrail = [];
-const trailLength = 10;
+// Cursor trail effect with throttling
+const TRAIL_FADE_DURATION = 600;
+let lastTrailTime = 0;
+const trailThrottle = 50; // ms between trail particles
 
 document.addEventListener('mousemove', (e) => {
+    const now = Date.now();
+    if (now - lastTrailTime < trailThrottle) return;
+    lastTrailTime = now;
+    
     const trail = document.createElement('div');
     trail.className = 'cursor-trail';
     trail.style.left = e.pageX + 'px';
     trail.style.top = e.pageY + 'px';
     document.body.appendChild(trail);
     
-    cursorTrail.push(trail);
-    if (cursorTrail.length > trailLength) {
-        const oldTrail = cursorTrail.shift();
-        oldTrail.remove();
-    }
-    
     setTimeout(() => {
         trail.style.opacity = '0';
         trail.style.transform = 'scale(0)';
     }, 10);
     
-    setTimeout(() => trail.remove(), 600);
+    setTimeout(() => trail.remove(), TRAIL_FADE_DURATION);
 });
 
 // Add cursor trail styles
