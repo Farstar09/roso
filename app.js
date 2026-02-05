@@ -47,7 +47,7 @@
                 navbar.style.boxShadow = 'none';
                 navbar.style.background = 'rgba(10, 10, 10, 0.95)';
             } else {
-                navbar.style.boxShadow = '0 4px 20px rgba(174, 129, 46, 0.3)';
+                navbar.style.boxShadow = '0 4px 20px rgba(220, 20, 60, 0.3)';
                 navbar.style.background = 'rgba(10, 10, 10, 0.98)';
             }
         });
@@ -101,8 +101,8 @@
             
             setTimeout(() => {
                 submitButton.textContent = '✓ Subscribed!';
-                submitButton.style.background = 'var(--nrg-orange-vibrant)';
-                submitButton.style.color = 'var(--surface-darkest)';
+                submitButton.style.background = 'var(--primary-red)';
+                submitButton.style.color = 'var(--text-primary)';
                 submitButton.style.transform = 'scale(1.05)';
                 
                 // Celebration effect
@@ -121,7 +121,7 @@
         }
         
         function triggerCelebration(element) {
-            const celebrationColors = ['#AE812E', '#FF6B35', '#ffffff'];
+            const celebrationColors = ['#DC143C', '#FF6B6B', '#ffffff'];
             const particleCount = 30;
             const elementRect = element.getBoundingClientRect();
             const centerX = elementRect.left + elementRect.width / 2;
@@ -303,12 +303,12 @@
                 position: absolute;
                 width: 6px;
                 height: 6px;
-                background: radial-gradient(circle, rgba(174, 129, 46, 0.8), rgba(255, 107, 53, 0.4));
+                background: radial-gradient(circle, rgba(220, 20, 60, 0.8), rgba(139, 0, 0, 0.4));
                 border-radius: 50%;
                 pointer-events: none;
                 z-index: 9999;
                 transition: opacity 0.6s ease, transform 0.6s ease;
-                box-shadow: 0 0 10px rgba(174, 129, 46, 0.5);
+                box-shadow: 0 0 10px rgba(220, 20, 60, 0.5);
                 left: ${x}px;
                 top: ${y}px;
             `;
@@ -327,8 +327,8 @@
         init3DTiltCards();
         initMouseTrail();
         
-        console.log('%c🌹 ROSO Esports - Where Talent Blooms 🌹', 'color: #AE812E; font-size: 20px; font-weight: bold;');
-        console.log('%cCombining STEM Excellence with Competitive Gaming', 'color: #FF6B35; font-size: 14px;');
+        console.log('%c🌹 ROSO Esports - Where Talent Blooms 🌹', 'color: #DC143C; font-size: 20px; font-weight: bold;');
+        console.log('%cAwarding talent and determination with opportunities', 'color: #FF6B6B; font-size: 14px;');
     };
     
     // Run when DOM is ready
