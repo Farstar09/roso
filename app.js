@@ -4,6 +4,15 @@
 (function() {
     'use strict';
     
+    // Configuration constants
+    const CONFIG = {
+        PARTICLE_MIN_VELOCITY: 5,
+        PARTICLE_SPREAD_MULTIPLIER: 30,
+        PARTICLE_UPWARD_BIAS: -50,
+        CARD_TILT_SENSITIVITY: 20,
+        MOUSE_TRAIL_INTERVAL: 50
+    };
+    
     // Smooth Navigation System
     const initSmoothNavigation = () => {
         const navLinks = document.querySelectorAll('a[href^="#"]');
@@ -30,7 +39,6 @@
     // Enhanced Navbar Scroll Behavior
     const initNavbarScroll = () => {
         const navbar = document.querySelector('.navbar');
-        let previousScrollPos = window.pageYOffset;
         
         window.addEventListener('scroll', () => {
             const currentScrollPos = window.pageYOffset;
@@ -42,8 +50,6 @@
                 navbar.style.boxShadow = '0 4px 20px rgba(174, 129, 46, 0.3)';
                 navbar.style.background = 'rgba(10, 10, 10, 0.98)';
             }
-            
-            previousScrollPos = currentScrollPos;
         });
     };
     
@@ -145,9 +151,9 @@
         
         function animateParticle(particle, index, total) {
             const angleStep = (Math.PI * 2 * index) / total;
-            const velocity = 5 + Math.random() * 5;
-            const translateX = Math.cos(angleStep) * velocity * 30;
-            const translateY = Math.sin(angleStep) * velocity * 30 - 50;
+            const velocity = CONFIG.PARTICLE_MIN_VELOCITY + Math.random() * 5;
+            const translateX = Math.cos(angleStep) * velocity * CONFIG.PARTICLE_SPREAD_MULTIPLIER;
+            const translateY = Math.sin(angleStep) * velocity * CONFIG.PARTICLE_SPREAD_MULTIPLIER + CONFIG.PARTICLE_UPWARD_BIAS;
             
             particle.animate([
                 { transform: 'translate(0, 0) scale(1)', opacity: 1 },
@@ -257,8 +263,8 @@
             const centerX = cardRect.width / 2;
             const centerY = cardRect.height / 2;
             
-            const rotateXValue = (mouseY - centerY) / 20;
-            const rotateYValue = (centerX - mouseX) / 20;
+            const rotateXValue = (mouseY - centerY) / CONFIG.CARD_TILT_SENSITIVITY;
+            const rotateYValue = (centerX - mouseX) / CONFIG.CARD_TILT_SENSITIVITY;
             
             card.style.transform = `translateY(-15px) rotateX(${rotateXValue}deg) rotateY(${rotateYValue}deg)`;
         }
@@ -271,13 +277,12 @@
     // Mouse Trail Effect
     const initMouseTrail = () => {
         let lastTrailTimestamp = 0;
-        const trailInterval = 50; // milliseconds between particles
         
         document.addEventListener('mousemove', handleMouseMove);
         
         function handleMouseMove(event) {
             const currentTime = Date.now();
-            if (currentTime - lastTrailTimestamp < trailInterval) return;
+            if (currentTime - lastTrailTimestamp < CONFIG.MOUSE_TRAIL_INTERVAL) return;
             lastTrailTimestamp = currentTime;
             
             const trailParticle = createTrailParticle(event.pageX, event.pageY);
