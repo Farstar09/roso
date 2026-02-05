@@ -1,0 +1,74 @@
+name: Deploy ROSO Esports Site
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "gh-pages"
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch repository
+        uses: actions/checkout@v4
+
+      - name: Verify site files exist
+        run: |
+          echo "Checking required site files..."
+          for f in index.html style.css app.js; do
+            if [ ! -f "$f" ]; then
+              echo "ERROR: Missing required file: $f"
+              exit 1
+            fi
+            echo "Found: $f"
+          done
+          echo "All required files present."
+
+      - name: Check HTML structure
+        run: |
+          set -e
+          echo "Validating index.html structure..."
+          grep -q '<!DOCTYPE html>' index.html
+          echo "DOCTYPE present"
+          grep -q '<html' index.html
+          echo "html tag present"
+          grep -q '<head>' index.html
+          echo "head tag present"
+          grep -q '<body>' index.html
+          echo "body tag present"
+          grep -q 'style.css' index.html
+          echo "CSS linked"
+          grep -q 'app.js' index.html
+          echo "JS linked"
+          echo "HTML structure looks good."
+
+  deploy:
+    needs: validate
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Fetch repository
+        uses: actions/checkout@v4
+
+      - name: Prepare Pages
+        uses: actions/configure-pages@v5
+
+      - name: Bundle site artifacts
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Publish to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
