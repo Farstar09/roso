@@ -324,8 +324,7 @@
         if (!loader) return;
 
         const isHomePage = window.location.pathname === '/' ||
-                           window.location.pathname.endsWith('/index.html') ||
-                           window.location.pathname.endsWith('/index.html/');
+                           window.location.pathname.endsWith('/index.html');
         const alreadyShown = sessionStorage.getItem('roso_intro_shown');
 
         if (!isHomePage || alreadyShown) {
