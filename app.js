@@ -231,6 +231,10 @@
         }
         
         function animateNumber(element, target, showPlus, duration = 2000) {
+            // Use faster duration for large year-like numbers (e.g. 2025)
+            if (target >= 2000 && !showPlus) {
+                duration = 800;
+            }
             const startValue = 0;
             const incrementStep = target / (duration / 16);
             let currentValue = startValue;
@@ -342,6 +346,45 @@
         });
     };
 
+    // About Section Reveal Animation
+    const initAboutReveal = () => {
+        const revealElements = document.querySelectorAll('.about-reveal');
+        if (!revealElements.length) return;
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('about-reveal-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        revealElements.forEach((el, i) => {
+            el.style.transitionDelay = (i * 0.25) + 's';
+            observer.observe(el);
+        });
+    };
+
+    // Scroll Indicator (shows "KEEP SCROLLING" until near bottom)
+    const initScrollIndicator = () => {
+        const indicator = document.getElementById('scrollIndicator');
+        if (!indicator) return;
+
+        const handleScroll = () => {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            if (scrollTop > 100 && scrollTop < docHeight - 200) {
+                indicator.classList.add('scroll-indicator-visible');
+            } else {
+                indicator.classList.remove('scroll-indicator-visible');
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        handleScroll();
+    };
+
     // Initialize all features
     const initializeApp = () => {
         initSiteLoader();
@@ -353,6 +396,8 @@
         initStatCounters();
         init3DTiltCards();
         initMouseTrail();
+        initAboutReveal();
+        initScrollIndicator();
         
         console.log('%c🌹 ROSO Esports - Where Talent Blooms 🌹', 'color: #DC143C; font-size: 20px; font-weight: bold;');
         console.log('%cAwarding talent and determination with opportunities', 'color: #FF6B6B; font-size: 14px;');
