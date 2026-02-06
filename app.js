@@ -10,7 +10,9 @@
         PARTICLE_SPREAD_MULTIPLIER: 30,
         PARTICLE_UPWARD_BIAS: -50,
         CARD_TILT_SENSITIVITY: 20,
-        MOUSE_TRAIL_INTERVAL: 50
+        MOUSE_TRAIL_INTERVAL: 50,
+        LOADER_DISPLAY_DURATION: 1800,
+        LOADER_FADE_DURATION: 600
     };
     
     // Smooth Navigation System
@@ -324,8 +326,8 @@
         window.addEventListener('load', () => {
             setTimeout(() => {
                 loader.classList.add('loader-hidden');
-                setTimeout(() => loader.remove(), 600);
-            }, 1800);
+                setTimeout(() => loader.remove(), CONFIG.LOADER_FADE_DURATION);
+            }, CONFIG.LOADER_DISPLAY_DURATION);
         });
     };
 
