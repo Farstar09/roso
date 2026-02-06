@@ -318,10 +318,21 @@
         }
     };
     
-    // Site Loading Animation
+    // Site Loading Animation — only on the first home-page visit per session
     const initSiteLoader = () => {
         const loader = document.getElementById('siteLoader');
         if (!loader) return;
+
+        const isHomePage = window.location.pathname === '/' ||
+                           window.location.pathname.endsWith('/index.html');
+        const alreadyShown = sessionStorage.getItem('roso_intro_shown');
+
+        if (!isHomePage || alreadyShown) {
+            loader.remove();
+            return;
+        }
+
+        sessionStorage.setItem('roso_intro_shown', '1');
 
         window.addEventListener('load', () => {
             setTimeout(() => {
