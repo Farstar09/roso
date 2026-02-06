@@ -176,7 +176,7 @@
         
         const animationObserver = new IntersectionObserver(handleIntersection, observerConfig);
         
-        const elementsToAnimate = document.querySelectorAll('.team-card, .news-card, .stat-item, .partner-logo');
+        const elementsToAnimate = document.querySelectorAll('.team-card, .news-card, .partner-logo');
         
         elementsToAnimate.forEach((element, index) => {
             element.style.opacity = '0';
