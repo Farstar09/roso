@@ -316,8 +316,22 @@
         }
     };
     
+    // Site Loading Animation
+    const initSiteLoader = () => {
+        const loader = document.getElementById('siteLoader');
+        if (!loader) return;
+
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                loader.classList.add('loader-hidden');
+                setTimeout(() => loader.remove(), 600);
+            }, 1800);
+        });
+    };
+
     // Initialize all features
     const initializeApp = () => {
+        initSiteLoader();
         initSmoothNavigation();
         initNavbarScroll();
         initParallaxEffect();
