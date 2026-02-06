@@ -12,7 +12,12 @@
         CARD_TILT_SENSITIVITY: 20,
         MOUSE_TRAIL_INTERVAL: 50,
         LOADER_DISPLAY_DURATION: 1800,
-        LOADER_FADE_DURATION: 600
+        LOADER_FADE_DURATION: 600,
+        YEAR_THRESHOLD: 2000,
+        YEAR_COUNTER_DURATION: 800,
+        REVEAL_STAGGER_DELAY: 0.25,
+        SCROLL_INDICATOR_TOP_THRESHOLD: 100,
+        SCROLL_INDICATOR_BOTTOM_OFFSET: 200
     };
     
     // Smooth Navigation System
@@ -232,8 +237,8 @@
         
         function animateNumber(element, target, showPlus, duration = 2000) {
             // Use faster duration for large year-like numbers (e.g. 2025)
-            if (target >= 2000 && !showPlus) {
-                duration = 800;
+            if (target >= CONFIG.YEAR_THRESHOLD && !showPlus) {
+                duration = CONFIG.YEAR_COUNTER_DURATION;
             }
             const startValue = 0;
             const incrementStep = target / (duration / 16);
@@ -361,7 +366,7 @@
         }, { threshold: 0.2 });
 
         revealElements.forEach((el, i) => {
-            el.style.transitionDelay = (i * 0.25) + 's';
+            el.style.transitionDelay = (i * CONFIG.REVEAL_STAGGER_DELAY) + 's';
             observer.observe(el);
         });
     };
@@ -374,7 +379,7 @@
         const handleScroll = () => {
             const scrollTop = window.pageYOffset;
             const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            if (scrollTop > 100 && scrollTop < docHeight - 200) {
+            if (scrollTop > CONFIG.SCROLL_INDICATOR_TOP_THRESHOLD && scrollTop < docHeight - CONFIG.SCROLL_INDICATOR_BOTTOM_OFFSET) {
                 indicator.classList.add('scroll-indicator-visible');
             } else {
                 indicator.classList.remove('scroll-indicator-visible');
