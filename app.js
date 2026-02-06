@@ -12,7 +12,12 @@
         CARD_TILT_SENSITIVITY: 20,
         MOUSE_TRAIL_INTERVAL: 50,
         LOADER_DISPLAY_DURATION: 1800,
-        LOADER_FADE_DURATION: 600
+        LOADER_FADE_DURATION: 600,
+        YEAR_THRESHOLD: 2000,
+        YEAR_COUNTER_DURATION: 800,
+        REVEAL_STAGGER_DELAY: 0.25,
+        SCROLL_INDICATOR_TOP_THRESHOLD: 100,
+        SCROLL_INDICATOR_BOTTOM_OFFSET: 200
     };
     
     // Smooth Navigation System
@@ -231,6 +236,10 @@
         }
         
         function animateNumber(element, target, showPlus, duration = 2000) {
+            // Use faster duration for large year-like numbers (e.g. 2025)
+            if (target >= CONFIG.YEAR_THRESHOLD && !showPlus) {
+                duration = CONFIG.YEAR_COUNTER_DURATION;
+            }
             const startValue = 0;
             const incrementStep = target / (duration / 16);
             let currentValue = startValue;
@@ -342,6 +351,45 @@
         });
     };
 
+    // About Section Reveal Animation
+    const initAboutReveal = () => {
+        const revealElements = document.querySelectorAll('.about-reveal');
+        if (!revealElements.length) return;
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('about-reveal-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        revealElements.forEach((el, i) => {
+            el.style.transitionDelay = (i * CONFIG.REVEAL_STAGGER_DELAY) + 's';
+            observer.observe(el);
+        });
+    };
+
+    // Scroll Indicator (shows "KEEP SCROLLING" until near bottom)
+    const initScrollIndicator = () => {
+        const indicator = document.getElementById('scrollIndicator');
+        if (!indicator) return;
+
+        const handleScroll = () => {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            if (scrollTop > CONFIG.SCROLL_INDICATOR_TOP_THRESHOLD && scrollTop < docHeight - CONFIG.SCROLL_INDICATOR_BOTTOM_OFFSET) {
+                indicator.classList.add('scroll-indicator-visible');
+            } else {
+                indicator.classList.remove('scroll-indicator-visible');
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        handleScroll();
+    };
+
     // Initialize all features
     const initializeApp = () => {
         initSiteLoader();
@@ -353,6 +401,8 @@
         initStatCounters();
         init3DTiltCards();
         initMouseTrail();
+        initAboutReveal();
+        initScrollIndicator();
         
         console.log('%c🌹 ROSO Esports - Where Talent Blooms 🌹', 'color: #DC143C; font-size: 20px; font-weight: bold;');
         console.log('%cAwarding talent and determination with opportunities', 'color: #FF6B6B; font-size: 14px;');

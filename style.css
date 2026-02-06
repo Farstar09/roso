@@ -1585,3 +1585,108 @@ section {
     color: var(--primary-red);
     font-weight: 700;
 }
+
+/* ── Game Logo SVGs ── */
+.game-logo {
+    width: 64px;
+    height: 64px;
+    color: var(--primary-red);
+    filter: drop-shadow(0 0 12px rgba(220, 20, 60, 0.7));
+    transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.team-card:hover .game-logo {
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 20px rgba(220, 20, 60, 1));
+}
+
+.game-logo.tbd-icon {
+    animation: questionBounce 2s ease-in-out infinite;
+}
+
+.roster-icon .game-logo {
+    width: 48px;
+    height: 48px;
+}
+
+/* ── About Reveal Animation ── */
+.about-reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.about-reveal.about-reveal-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ── Scroll Indicator ── */
+.scroll-indicator {
+    position: fixed;
+    right: 28px;
+    bottom: 32px;
+    z-index: 900;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    pointer-events: none;
+}
+
+.scroll-indicator.scroll-indicator-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.scroll-indicator-text {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    color: var(--primary-red);
+    text-transform: uppercase;
+    white-space: nowrap;
+    text-shadow: 0 0 8px rgba(220, 20, 60, 0.5);
+}
+
+.scroll-indicator-line {
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: var(--primary-red);
+    box-shadow: 0 0 6px rgba(220, 20, 60, 0.5);
+}
+
+.scroll-indicator-arrow {
+    width: 16px;
+    height: 16px;
+    color: var(--primary-red);
+    animation: scrollArrowBounce 1.5s ease-in-out infinite;
+}
+
+@keyframes scrollArrowBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+}
+
+/* ── Section Entrance Enhancements ── */
+.section-header h2 {
+    position: relative;
+    display: inline-block;
+}
+
+.header-line {
+    transition: width 0.6s ease;
+}
+
+/* ── Enhanced Hero Glow Pulse ── */
+.hero-title {
+    animation: heroTitleGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes heroTitleGlow {
+    0% { text-shadow: 0 0 20px rgba(220, 20, 60, 0.3); }
+    100% { text-shadow: 0 0 40px rgba(220, 20, 60, 0.7), 0 0 80px rgba(220, 20, 60, 0.3); }
+}
