@@ -11,7 +11,7 @@
         PARTICLE_UPWARD_BIAS: -50,
         CARD_TILT_SENSITIVITY: 20,
         MOUSE_TRAIL_INTERVAL: 50,
-        LOADER_DISPLAY_DURATION: 1800,
+        LOADER_DISPLAY_DURATION: 3000,
         LOADER_FADE_DURATION: 600,
         YEAR_THRESHOLD: 2000,
         YEAR_COUNTER_DURATION: 800,
@@ -327,21 +327,10 @@
         }
     };
     
-    // Site Loading Animation — only on the first home-page visit per session
+    // Site Loading Animation — shows for 3 seconds every time the site is opened
     const initSiteLoader = () => {
         const loader = document.getElementById('siteLoader');
         if (!loader) return;
-
-        const isHomePage = window.location.pathname === '/' ||
-                           window.location.pathname.endsWith('/index.html');
-        const alreadyShown = sessionStorage.getItem('roso_intro_shown');
-
-        if (!isHomePage || alreadyShown) {
-            loader.remove();
-            return;
-        }
-
-        sessionStorage.setItem('roso_intro_shown', '1');
 
         window.addEventListener('load', () => {
             setTimeout(() => {

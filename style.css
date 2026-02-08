@@ -1350,7 +1350,7 @@ section {
     background: linear-gradient(90deg, #DC143C, #FF6B6B);
     border-radius: 2px;
     box-shadow: 0 0 10px rgba(220, 20, 60, 0.6);
-    animation: loaderFill 1.5s ease forwards;
+    animation: loaderFill 2.7s ease forwards;
 }
 
 @keyframes loaderPulseGlow {
