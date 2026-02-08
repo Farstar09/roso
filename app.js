@@ -327,7 +327,7 @@
         }
     };
     
-    // Site Loading Animation — only plays once per session on the home page
+    // Site Loading Animation — plays on reload and first visit, skips on in-site navigation
     const initSiteLoader = () => {
         const loader = document.getElementById('siteLoader');
         if (!loader) return;
@@ -335,9 +335,12 @@
         const isHomePage = window.location.pathname === '/' ||
             window.location.pathname.endsWith('/index.html') ||
             window.location.pathname.endsWith('/index.htm');
+
+        const navEntry = performance.getEntriesByType('navigation')[0];
+        const isReload = navEntry && navEntry.type === 'reload';
         const hasPlayed = sessionStorage.getItem('roso_intro_played');
 
-        if (isHomePage && !hasPlayed) {
+        if (isHomePage && (isReload || !hasPlayed)) {
             sessionStorage.setItem('roso_intro_played', '1');
             window.addEventListener('load', () => {
                 setTimeout(() => {
