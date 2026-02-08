@@ -78,6 +78,20 @@ a {
     gap: 0;
 }
 
+/* New image-based logo styles */
+.logo-image {
+    height: 50px;
+    width: auto;
+    display: block;
+    transition: opacity 0.3s ease;
+}
+
+.logo-image:hover {
+    opacity: 0.8;
+}
+
+/* Legacy text-based logo styles (kept for reference) */
+/*
 .logo-text {
     font-size: 2rem;
     font-weight: 900;
@@ -97,6 +111,7 @@ a {
     margin-top: -0.3125rem;
     text-shadow: var(--glow-red);
 }
+*/
 
 .nav-menu {
     display: flex;
@@ -730,6 +745,10 @@ section {
     .footer-content {
         grid-template-columns: 1fr;
     }
+    
+    .logo-image {
+        height: 40px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -737,9 +756,12 @@ section {
         padding-inline: 1rem;
     }
     
+    /* Legacy text logo mobile style (kept for reference) */
+    /*
     .logo-text {
         font-size: 1.5rem;
     }
+    */
 }
 
 /* Custom Scrollbar */
