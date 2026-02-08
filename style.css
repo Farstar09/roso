@@ -81,7 +81,6 @@ a {
 /* New image-based logo styles */
 .logo-image {
     height: 50px;
-    max-height: 50px;
     width: auto;
     max-width: 200px;
     display: block;
