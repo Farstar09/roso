@@ -327,17 +327,27 @@
         }
     };
     
-    // Site Loading Animation — shows for 3 seconds every time the site is opened
+    // Site Loading Animation — only plays once per session on the home page
     const initSiteLoader = () => {
         const loader = document.getElementById('siteLoader');
         if (!loader) return;
 
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                loader.classList.add('loader-hidden');
-                setTimeout(() => loader.remove(), CONFIG.LOADER_FADE_DURATION);
-            }, CONFIG.LOADER_DISPLAY_DURATION);
-        });
+        const isHomePage = window.location.pathname === '/' ||
+            window.location.pathname.endsWith('/index.html') ||
+            window.location.pathname.endsWith('/index.htm');
+        const hasPlayed = sessionStorage.getItem('roso_intro_played');
+
+        if (isHomePage && !hasPlayed) {
+            sessionStorage.setItem('roso_intro_played', '1');
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    loader.classList.add('loader-hidden');
+                    setTimeout(() => loader.remove(), CONFIG.LOADER_FADE_DURATION);
+                }, CONFIG.LOADER_DISPLAY_DURATION);
+            });
+        } else {
+            loader.remove();
+        }
     };
 
     // About Section Reveal Animation
