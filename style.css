@@ -184,7 +184,7 @@ a {
     background: 
         radial-gradient(circle at 20% 50%, rgba(220, 20, 60, 0.15) 0%, transparent 50%),
         radial-gradient(circle at 80% 50%, rgba(139, 0, 0, 0.1) 0%, transparent 50%);
-    z-index: 1;
+    z-index: 0;
     pointer-events: none;
 }
 
@@ -357,11 +357,12 @@ section {
 
 .about-corner-layout {
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: auto 1fr auto;
     grid-template-rows: auto auto auto;
-    gap: 2rem;
+    gap: 1rem;
     align-items: center;
-    min-height: 500px;
+    max-width: 900px;
+    margin-inline: auto;
 }
 
 .about-corner-tl {
@@ -1075,7 +1076,7 @@ section {
 .hero-video-wrap {
     position: absolute;
     inset: 0;
-    z-index: 0;
+    z-index: 1;
     overflow: hidden;
 }
 
@@ -1088,7 +1089,7 @@ section {
 .hero-video-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(10, 10, 10, 0.45);
+    background: rgba(10, 10, 10, 0.35);
 }
 
 /* ── Leadership Section (About Page) ── */
