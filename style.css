@@ -358,10 +358,18 @@ section {
 }
 
 .about-text p {
-    font-size: 1.1rem;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 300;
     color: var(--text-secondary);
     margin-bottom: 1.5rem;
-    line-height: 1.8;
+    line-height: 1.9;
+    letter-spacing: 0.02em;
+    border-left: 3px solid var(--primary-red);
+    padding-left: 1.25rem;
+    background: linear-gradient(90deg, rgba(220, 20, 60, 0.06), transparent);
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
 }
 
 .about-stats {
@@ -1042,6 +1050,21 @@ section {
     margin-bottom: 1.25rem;
 }
 
+.leader-pfp {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 16px;
+    border: 2px solid rgba(220, 20, 60, 0.4);
+    margin-bottom: 1.25rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.leader-profile:hover .leader-pfp {
+    border-color: var(--primary-red);
+    box-shadow: 0 0 20px rgba(220, 20, 60, 0.35);
+}
+
 .leader-name {
     font-family: 'Oswald', sans-serif;
     font-size: 1.4rem;
@@ -1140,6 +1163,29 @@ section {
     border-radius: 0.5rem;
     padding: 0.75rem 1rem;
     min-width: 160px;
+}
+
+.rp-entry.rp-entry-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1.5rem 1rem;
+    min-width: 140px;
+    gap: 0.5rem;
+    border-radius: 0.75rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.rp-entry.rp-entry-card:hover {
+    border-color: rgba(220, 20, 60, 0.4);
+    box-shadow: 0 4px 16px rgba(220, 20, 60, 0.15);
+}
+
+.rp-entry.rp-entry-card .rp-pfp {
+    width: 100px;
+    height: 100px;
+    border-radius: 12px;
+    margin-bottom: 0.25rem;
 }
 
 .rp-tag {
@@ -1317,6 +1363,10 @@ section {
     .rp-entry {
         min-width: auto;
         flex: 1 1 100%;
+    }
+    .rp-entry.rp-entry-card {
+        flex: 0 1 auto;
+        min-width: 120px;
     }
 }
 
