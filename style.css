@@ -1940,40 +1940,108 @@ section {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    gap: 0.5rem;
+    position: relative;
 }
 
 .animated-logo {
     width: 150px;
     height: auto;
-    animation: logoAnimation 6s ease-in-out infinite;
+    animation: logoSpin 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards,
+               logoHover 2.5s ease-in-out 1.2s infinite;
     transform-origin: center center;
+    filter: drop-shadow(0 0 8px rgba(220, 20, 60, 0.5));
 }
 
-/* Combined Animation: zoom, spin, glow, bounce */
-@keyframes logoAnimation {
+/* Bars that appear alongside the logo */
+.logo-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-end;
+}
+
+.logo-bars.right {
+    align-items: flex-start;
+}
+
+.logo-bars .bar {
+    display: block;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(220, 20, 60, 0.9), rgba(255, 107, 107, 0.4));
+    border-radius: 1px;
+    animation: barAppear 0.5s ease-out forwards, barDisappear 0.5s ease-in 1.5s forwards;
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: right center;
+}
+
+.logo-bars.right .bar {
+    background: linear-gradient(270deg, rgba(220, 20, 60, 0.9), rgba(255, 107, 107, 0.4));
+    transform-origin: left center;
+}
+
+.logo-bars .bar:nth-child(1) { width: 40px; animation-delay: 0.1s, 1.5s; }
+.logo-bars .bar:nth-child(2) { width: 60px; animation-delay: 0.2s, 1.6s; }
+.logo-bars .bar:nth-child(3) { width: 80px; animation-delay: 0.3s, 1.7s; }
+.logo-bars .bar:nth-child(4) { width: 60px; animation-delay: 0.4s, 1.8s; }
+.logo-bars .bar:nth-child(5) { width: 40px; animation-delay: 0.5s, 1.9s; }
+
+/* Spin once animation */
+@keyframes logoSpin {
     0% {
-        transform: scale(0.8) rotate(0deg);
+        transform: scale(0.5) rotate(0deg);
+        opacity: 0;
         filter: drop-shadow(0 0 0px rgba(220, 20, 60, 0));
     }
-    25% {
-        transform: scale(1.2) rotate(720deg);
-        filter: drop-shadow(0 0 15px rgba(220, 20, 60, 0.6));
-    }
-    40% {
-        transform: scale(1.2) rotate(1080deg);
-        filter: drop-shadow(0 0 30px rgba(220, 20, 60, 1));
-    }
-    60% {
-        transform: scale(1.1) rotate(1080deg) translateY(-10px);
+    50% {
+        opacity: 1;
         filter: drop-shadow(0 0 20px rgba(220, 20, 60, 0.8));
     }
-    75% {
-        transform: scale(1) rotate(1080deg) translateY(-5px);
-        filter: drop-shadow(0 0 10px rgba(220, 20, 60, 0.6));
+    100% {
+        transform: scale(1) rotate(360deg);
+        opacity: 1;
+        filter: drop-shadow(0 0 8px rgba(220, 20, 60, 0.5));
+    }
+}
+
+/* Continuous hover/float animation */
+@keyframes logoHover {
+    0% {
+        transform: scale(1) rotate(360deg) translateY(0);
+        filter: drop-shadow(0 0 8px rgba(220, 20, 60, 0.5));
+    }
+    50% {
+        transform: scale(1.03) rotate(360deg) translateY(-8px);
+        filter: drop-shadow(0 0 15px rgba(220, 20, 60, 0.7));
     }
     100% {
-        transform: scale(0.8) rotate(1080deg) translateY(0);
-        filter: drop-shadow(0 0 0px rgba(220, 20, 60, 0));
+        transform: scale(1) rotate(360deg) translateY(0);
+        filter: drop-shadow(0 0 8px rgba(220, 20, 60, 0.5));
+    }
+}
+
+/* Bars slide in */
+@keyframes barAppear {
+    0% {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+    100% {
+        opacity: 1;
+        transform: scaleX(1);
+    }
+}
+
+/* Bars fade out */
+@keyframes barDisappear {
+    0% {
+        opacity: 1;
+        transform: scaleX(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scaleX(0);
     }
 }
 
@@ -1983,5 +2051,9 @@ section {
         animation: none;
         transform: scale(1);
         filter: none;
+    }
+    .logo-bars .bar {
+        animation: none;
+        opacity: 0;
     }
 }
