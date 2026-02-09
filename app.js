@@ -327,30 +327,18 @@
         }
     };
     
-    // Site Loading Animation — plays on reload and first visit, skips on in-site navigation
+    // Site Loading Animation — plays every time the page loads
     const initSiteLoader = () => {
         const loader = document.getElementById('siteLoader');
         if (!loader) return;
 
-        const isHomePage = window.location.pathname === '/' ||
-            window.location.pathname.endsWith('/index.html') ||
-            window.location.pathname.endsWith('/index.htm');
-
-        const navEntry = performance.getEntriesByType('navigation')[0];
-        const isReload = navEntry && navEntry.type === 'reload';
-        const hasPlayed = sessionStorage.getItem('roso_intro_played');
-
-        if (isHomePage && (isReload || !hasPlayed)) {
-            sessionStorage.setItem('roso_intro_played', '1');
-            window.addEventListener('load', () => {
-                setTimeout(() => {
-                    loader.classList.add('loader-hidden');
-                    setTimeout(() => loader.remove(), CONFIG.LOADER_FADE_DURATION);
-                }, CONFIG.LOADER_DISPLAY_DURATION);
-            });
-        } else {
-            loader.remove();
-        }
+        // Show loader animation every time
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                loader.classList.add('loader-hidden');
+                setTimeout(() => loader.remove(), CONFIG.LOADER_FADE_DURATION);
+            }, CONFIG.LOADER_DISPLAY_DURATION);
+        });
     };
 
     // Under Development Popup — shows 2 seconds after intro animation finishes
