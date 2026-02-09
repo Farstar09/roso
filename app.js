@@ -353,6 +353,31 @@
         }
     };
 
+    // Under Development Popup — shows 2 seconds after intro animation finishes
+    const initDevPopup = () => {
+        const overlay = document.getElementById('devPopupOverlay');
+        const closeBtn = document.getElementById('devPopupClose');
+        if (!overlay || !closeBtn) return;
+
+        const loaderTotal = CONFIG.LOADER_DISPLAY_DURATION + CONFIG.LOADER_FADE_DURATION;
+        const popupDelay = loaderTotal + 2000;
+
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                overlay.classList.add('popup-visible');
+            }, popupDelay);
+        });
+
+        const closePopup = () => {
+            overlay.classList.remove('popup-visible');
+        };
+
+        closeBtn.addEventListener('click', closePopup);
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) closePopup();
+        });
+    };
+
     // About Section Reveal Animation
     const initAboutReveal = () => {
         const revealElements = document.querySelectorAll('.about-reveal');
@@ -395,6 +420,7 @@
     // Initialize all features
     const initializeApp = () => {
         initSiteLoader();
+        initDevPopup();
         initSmoothNavigation();
         initNavbarScroll();
         initParallaxEffect();
