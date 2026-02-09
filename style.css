@@ -1444,6 +1444,117 @@ section {
     100% { width: 100%; }
 }
 
+/* ── Under Development Popup ── */
+.dev-popup-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99998;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+    backdrop-filter: blur(4px);
+}
+
+.dev-popup-overlay.popup-visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.dev-popup {
+    background: linear-gradient(145deg, #1a1a1a 0%, #0d0d0d 100%);
+    border: 1px solid rgba(220, 20, 60, 0.4);
+    border-radius: 16px;
+    padding: 2.5rem 2rem;
+    max-width: 420px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 0 40px rgba(220, 20, 60, 0.2), 0 20px 60px rgba(0, 0, 0, 0.5);
+    transform: scale(0.85) translateY(20px);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.dev-popup-overlay.popup-visible .dev-popup {
+    transform: scale(1) translateY(0);
+}
+
+.dev-popup-close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    background: none;
+    border: none;
+    color: var(--text-tertiary);
+    font-size: 1.6rem;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+    line-height: 1;
+}
+
+.dev-popup-close:hover {
+    color: var(--primary-red);
+    transform: rotate(90deg);
+}
+
+.dev-popup-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.dev-popup-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: linear-gradient(135deg, #DC143C 0%, #FF6B6B 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+}
+
+.dev-popup-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+}
+
+.dev-popup-discord {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(220, 20, 60, 0.1);
+    border: 1px solid rgba(220, 20, 60, 0.3);
+    border-radius: 8px;
+    padding: 0.6rem 1.2rem;
+    margin-top: 0.75rem;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: 0.02em;
+}
+
+.dev-popup-discord-icon {
+    font-size: 1.2rem;
+}
+
+.dev-popup-subtext {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+    margin-top: 0.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+}
+
 /* ── SVG Social Icons ── */
 .social-icon svg {
     width: 24px;
