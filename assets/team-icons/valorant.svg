@@ -1,0 +1,6 @@
+<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="200" fill="#1a1a1a" rx="20"/>
+  <text x="100" y="90" text-anchor="middle" fill="#DC143C" font-family="sans-serif" font-size="14" font-weight="bold">VALORANT</text>
+  <text x="100" y="120" text-anchor="middle" fill="#808080" font-family="sans-serif" font-size="12">Team Icon</text>
+  <text x="100" y="145" text-anchor="middle" fill="#555" font-family="sans-serif" font-size="10">Replace this image</text>
+</svg>

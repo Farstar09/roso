@@ -1714,3 +1714,57 @@ section {
     0% { text-shadow: 0 0 20px rgba(220, 20, 60, 0.3); }
     100% { text-shadow: 0 0 40px rgba(220, 20, 60, 0.7), 0 0 80px rgba(220, 20, 60, 0.3); }
 }
+
+/* ── Team Icon Image Placeholders ── */
+.team-icon-img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    border-radius: 12px;
+    border: 2px solid rgba(220, 20, 60, 0.3);
+    transition: transform 0.4s ease, border-color 0.4s ease;
+}
+
+.team-card:hover .team-icon-img {
+    transform: scale(1.15);
+    border-color: var(--primary-red);
+}
+
+/* ── Team Card Link Wrapper ── */
+.team-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+/* ── Team Page Header (individual team pages) ── */
+.team-page-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.team-page-icon {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    border-radius: 16px;
+    border: 2px solid rgba(220, 20, 60, 0.4);
+}
+
+/* ── Player / Staff Profile Picture (PFP) ── */
+.rp-pfp {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid rgba(220, 20, 60, 0.3);
+    flex-shrink: 0;
+}
+
+@media (max-width: 600px) {
+    .team-page-header {
+        flex-direction: column;
+        text-align: center;
+    }
+}
