@@ -224,6 +224,12 @@
                     const hasPlusSign = originalText.includes('+');
                     const targetNumber = parseInt(originalText.replace('+', ''));
                     
+                    // Skip animation for non-numeric values
+                    if (isNaN(targetNumber)) {
+                        statObserver.unobserve(entry.target);
+                        return;
+                    }
+                    
                     statElement.textContent = '0' + (hasPlusSign ? '+' : '');
                     
                     setTimeout(() => {

@@ -170,7 +170,6 @@ a {
 /* Hero Section - Unique Design */
 .hero {
     position: relative;
-    z-index: 0;
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -185,12 +184,14 @@ a {
     background: 
         radial-gradient(circle at 20% 50%, rgba(220, 20, 60, 0.15) 0%, transparent 50%),
         radial-gradient(circle at 80% 50%, rgba(139, 0, 0, 0.1) 0%, transparent 50%);
-    z-index: -1;
+    z-index: 1;
+    pointer-events: none;
 }
 
 .hero-content {
     text-align: center;
-    z-index: 1;
+    z-index: 2;
+    position: relative;
 }
 
 .hero-title {
@@ -351,10 +352,74 @@ section {
 }
 
 .about-content {
+    position: relative;
+}
+
+.about-corner-layout {
     display: grid;
-    grid-template-columns: 3fr 2fr;
-    gap: 3rem;
-    align-items: start;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 2rem;
+    align-items: center;
+    min-height: 500px;
+}
+
+.about-corner-tl {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+    align-self: start;
+}
+
+.about-corner-tr {
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: end;
+    align-self: start;
+}
+
+.about-center {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.about-center-text {
+    max-width: 700px;
+    margin-top: 1.5rem;
+}
+
+.about-center-text p {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 300;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    line-height: 1.9;
+    letter-spacing: 0.02em;
+    border-left: 3px solid var(--primary-red);
+    padding-left: 1.25rem;
+    background: linear-gradient(90deg, rgba(220, 20, 60, 0.06), transparent);
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    text-align: left;
+}
+
+.about-corner-bl {
+    grid-column: 1;
+    grid-row: 3;
+    justify-self: start;
+    align-self: end;
+}
+
+.about-corner-br {
+    grid-column: 3;
+    grid-row: 3;
+    justify-self: end;
+    align-self: end;
 }
 
 .about-text p {
@@ -716,14 +781,21 @@ section {
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-    .about-content {
+    .about-corner-layout {
         grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        gap: 1.5rem;
     }
-    
-    .about-stats {
-        flex-direction: row;
-        justify-content: space-around;
+
+    .about-corner-tl,
+    .about-corner-tr,
+    .about-corner-bl,
+    .about-corner-br {
+        justify-self: center;
+        grid-column: 1;
     }
+
+    .about-center { grid-column: 1; }
     
     .news-grid {
         grid-template-columns: 1fr;
@@ -1003,7 +1075,7 @@ section {
 .hero-video-wrap {
     position: absolute;
     inset: 0;
-    z-index: -2;
+    z-index: 0;
     overflow: hidden;
 }
 
@@ -1938,7 +2010,7 @@ section {
 .animated-logo-container {
     margin-top: 2rem;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     gap: 0.5rem;
     position: relative;
@@ -1970,7 +2042,7 @@ section {
     height: 2px;
     background: linear-gradient(90deg, rgba(220, 20, 60, 0.9), rgba(255, 107, 107, 0.4));
     border-radius: 1px;
-    animation: barAppear 0.5s ease-out forwards, barDisappear 0.5s ease-in 1.5s forwards;
+    animation: barAppear 0.5s ease-out forwards;
     opacity: 0;
     transform: scaleX(0);
     transform-origin: right center;
@@ -1981,11 +2053,11 @@ section {
     transform-origin: left center;
 }
 
-.logo-bars .bar:nth-child(1) { width: 40px; animation-delay: 0.1s, 1.5s; }
-.logo-bars .bar:nth-child(2) { width: 60px; animation-delay: 0.2s, 1.6s; }
-.logo-bars .bar:nth-child(3) { width: 80px; animation-delay: 0.3s, 1.7s; }
-.logo-bars .bar:nth-child(4) { width: 60px; animation-delay: 0.4s, 1.8s; }
-.logo-bars .bar:nth-child(5) { width: 40px; animation-delay: 0.5s, 1.9s; }
+.logo-bars .bar:nth-child(1) { width: 40px; animation-delay: 0.1s; }
+.logo-bars .bar:nth-child(2) { width: 60px; animation-delay: 0.2s; }
+.logo-bars .bar:nth-child(3) { width: 80px; animation-delay: 0.3s; }
+.logo-bars .bar:nth-child(4) { width: 60px; animation-delay: 0.4s; }
+.logo-bars .bar:nth-child(5) { width: 40px; animation-delay: 0.5s; }
 
 /* Spin once animation */
 @keyframes logoSpin {
