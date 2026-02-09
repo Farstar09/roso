@@ -1933,3 +1933,55 @@ section {
         text-align: center;
     }
 }
+
+/* Animated Logo Styles */
+.animated-logo-container {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.animated-logo {
+    width: 150px;
+    height: auto;
+    animation: logoAnimation 6s ease-in-out infinite;
+    transform-origin: center center;
+}
+
+/* Combined Animation: zoom, spin, glow, bounce */
+@keyframes logoAnimation {
+    0% {
+        transform: scale(0.8) rotate(0deg);
+        filter: drop-shadow(0 0 0px rgba(220, 20, 60, 0));
+    }
+    25% {
+        transform: scale(1.2) rotate(720deg);
+        filter: drop-shadow(0 0 15px rgba(220, 20, 60, 0.6));
+    }
+    40% {
+        transform: scale(1.2) rotate(1080deg);
+        filter: drop-shadow(0 0 30px rgba(220, 20, 60, 1));
+    }
+    60% {
+        transform: scale(1.1) rotate(1080deg) translateY(-10px);
+        filter: drop-shadow(0 0 20px rgba(220, 20, 60, 0.8));
+    }
+    75% {
+        transform: scale(1) rotate(1080deg) translateY(-5px);
+        filter: drop-shadow(0 0 10px rgba(220, 20, 60, 0.6));
+    }
+    100% {
+        transform: scale(0.8) rotate(1080deg) translateY(0);
+        filter: drop-shadow(0 0 0px rgba(220, 20, 60, 0));
+    }
+}
+
+/* Respect user preference for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .animated-logo {
+        animation: none;
+        transform: scale(1);
+        filter: none;
+    }
+}
