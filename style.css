@@ -792,13 +792,10 @@ section {
     .about-corner-bl,
     .about-corner-br {
         justify-self: center;
+        grid-column: 1;
     }
 
-    .about-corner-tl { grid-column: 1; grid-row: auto; }
-    .about-corner-tr { grid-column: 1; grid-row: auto; }
-    .about-center { grid-column: 1; grid-row: auto; }
-    .about-corner-bl { grid-column: 1; grid-row: auto; }
-    .about-corner-br { grid-column: 1; grid-row: auto; }
+    .about-center { grid-column: 1; }
     
     .news-grid {
         grid-template-columns: 1fr;
