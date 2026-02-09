@@ -327,34 +327,60 @@
         }
     };
     
-    // Site Loading Animation — plays every time the page loads
+    // Site Loading Animation — plays only once on home page
     const initSiteLoader = () => {
         const loader = document.getElementById('siteLoader');
         if (!loader) return;
 
-        // Show loader animation every time
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                loader.classList.add('loader-hidden');
-                setTimeout(() => loader.remove(), CONFIG.LOADER_FADE_DURATION);
-            }, CONFIG.LOADER_DISPLAY_DURATION);
-        });
+        // Check if we're on the home page (index.html or root)
+        const isHomePage = window.location.pathname === '/' || 
+                          window.location.pathname === '/index.html' ||
+                          window.location.pathname.endsWith('/index.html');
+        
+        // Check if loader has been shown before
+        const hasSeenLoader = localStorage.getItem('rosoLoaderShown') === 'true';
+
+        // Only show loader on home page and if not shown before
+        if (isHomePage && !hasSeenLoader) {
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    loader.classList.add('loader-hidden');
+                    setTimeout(() => loader.remove(), CONFIG.LOADER_FADE_DURATION);
+                    // Mark loader as shown
+                    localStorage.setItem('rosoLoaderShown', 'true');
+                }, CONFIG.LOADER_DISPLAY_DURATION);
+            });
+        } else {
+            // Hide loader immediately if not on home page or already shown
+            loader.remove();
+        }
     };
 
-    // Under Development Popup — shows 2 seconds after intro animation finishes
+    // Under Development Popup — shows 2 seconds after intro animation finishes (only on home page first visit)
     const initDevPopup = () => {
         const overlay = document.getElementById('devPopupOverlay');
         const closeBtn = document.getElementById('devPopupClose');
         if (!overlay || !closeBtn) return;
 
-        const loaderTotal = CONFIG.LOADER_DISPLAY_DURATION + CONFIG.LOADER_FADE_DURATION;
-        const popupDelay = loaderTotal + 2000;
+        // Check if we're on the home page
+        const isHomePage = window.location.pathname === '/' || 
+                          window.location.pathname === '/index.html' ||
+                          window.location.pathname.endsWith('/index.html');
+        
+        // Check if loader has been shown before
+        const hasSeenLoader = localStorage.getItem('rosoLoaderShown') === 'true';
 
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                overlay.classList.add('popup-visible');
-            }, popupDelay);
-        });
+        // Only show popup on home page and if loader was just shown (first visit)
+        if (isHomePage && !hasSeenLoader) {
+            const loaderTotal = CONFIG.LOADER_DISPLAY_DURATION + CONFIG.LOADER_FADE_DURATION;
+            const popupDelay = loaderTotal + 2000;
+
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    overlay.classList.add('popup-visible');
+                }, popupDelay);
+            });
+        }
 
         const closePopup = () => {
             overlay.classList.remove('popup-visible');
