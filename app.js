@@ -374,7 +374,7 @@
                     // Start video playback after loader finishes
                     if (heroVideo) {
                         heroVideo.currentTime = 0;
-                        heroVideo.play();
+                        heroVideo.play().catch(() => {});
                     }
 
                     // Show hero content after the video's "ROSO 2026" fades out
