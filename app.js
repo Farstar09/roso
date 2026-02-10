@@ -524,6 +524,42 @@
         });
     };
 
+    // Mobile Hamburger Menu
+    const initMobileMenu = () => {
+        const hamburger = document.querySelector('.hamburger');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const overlay = document.querySelector('.mobile-menu-overlay');
+        if (!hamburger || !mobileMenu || !overlay) return;
+
+        const toggleMenu = () => {
+            const isActive = mobileMenu.classList.contains('active');
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.classList.toggle('menu-open', !isActive);
+        };
+
+        const closeMenu = () => {
+            hamburger.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.classList.remove('menu-open');
+        };
+
+        hamburger.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', closeMenu);
+
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+                closeMenu();
+            }
+        });
+    };
+
     // Initialize all features
     const initializeApp = () => {
         initSiteLoader();
@@ -539,6 +575,7 @@
         initAboutReveal();
         initScrollIndicator();
         initVideoFullscreen();
+        initMobileMenu();
         
         console.log('%c🌹 ROSO Esports - Where Talent Blooms 🌹', 'color: #DC143C; font-size: 20px; font-weight: bold;');
         console.log('%cAwarding talent and determination with opportunities', 'color: #FF6B6B; font-size: 14px;');
