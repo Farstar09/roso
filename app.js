@@ -11,7 +11,7 @@
         PARTICLE_UPWARD_BIAS: -50,
         CARD_TILT_SENSITIVITY: 20,
         MOUSE_TRAIL_INTERVAL: 50,
-        LOADER_DISPLAY_DURATION: 3000,
+        LOADER_DISPLAY_DURATION: 2500,
         LOADER_FADE_DURATION: 600,
         YEAR_THRESHOLD: 2000,
         YEAR_COUNTER_DURATION: 800,
@@ -356,21 +356,35 @@
 
         // Only show loader on home page and if not shown this session
         if (isHomePage && !hasSeenLoader) {
-            const loaderTotal = CONFIG.LOADER_DISPLAY_DURATION + CONFIG.LOADER_FADE_DURATION;
             const heroContent = document.querySelector('.hero-content');
+            const heroVideo = document.querySelector('.hero-bg-video');
+
+            // Pause video during loader, resume after
+            if (heroVideo) {
+                heroVideo.pause();
+            }
+
             window.addEventListener('load', () => {
                 setTimeout(() => {
                     loader.classList.add('loader-hidden');
                     setTimeout(() => loader.remove(), CONFIG.LOADER_FADE_DURATION);
                     // Mark loader as shown for this session
                     sessionStorage.setItem('rosoLoaderShown', 'true');
+
+                    // Start video playback after loader finishes
+                    if (heroVideo) {
+                        heroVideo.currentTime = 0;
+                        heroVideo.play().catch(() => {});
+                    }
+
+                    // Show hero content after the video's "ROSO 2026" fades out
+                    // (~4.5s after loader finishes to let the video intro play)
+                    if (heroContent) {
+                        setTimeout(() => {
+                            heroContent.classList.add('hero-content-visible');
+                        }, 4500);
+                    }
                 }, CONFIG.LOADER_DISPLAY_DURATION);
-                // Delay hero content until after loader finishes
-                if (heroContent) {
-                    setTimeout(() => {
-                        heroContent.classList.add('hero-content-visible');
-                    }, loaderTotal);
-                }
             });
         } else {
             // Hide loader immediately if not on home page or already shown
@@ -399,8 +413,8 @@
 
         // Only show popup on home page and if loader was just shown (first visit this session)
         if (isHomePage && !hasSeenLoader) {
-            const loaderTotal = CONFIG.LOADER_DISPLAY_DURATION + CONFIG.LOADER_FADE_DURATION;
-            const popupDelay = loaderTotal + 2000;
+            // Show popup 2s after hero content appears (loader + video intro + hero reveal)
+            const popupDelay = CONFIG.LOADER_DISPLAY_DURATION + 4500 + 2000;
 
             window.addEventListener('load', () => {
                 setTimeout(() => {
