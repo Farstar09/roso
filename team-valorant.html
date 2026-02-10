@@ -22,9 +22,32 @@
                     </a>
                 </div>
                 <ul class="nav-menu">
-                    <li><a href="index.html#home">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="teams.html">Teams</a></li>
+                    <li>
+                        <a href="index.html#home">Home</a>
+                        <ul class="nav-dropdown">
+                            <li><a href="index.html#about">Who We Are</a></li>
+                            <li><a href="index.html#teams">Our Teams</a></li>
+                            <li><a href="index.html#news">Latest News</a></li>
+                            <li><a href="index.html#partners">Partners</a></li>
+                            <li><a href="index.html#discord">Discord</a></li>
+                            <li><a href="index.html#contact">Stay Connected</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="about.html">About</a>
+                        <ul class="nav-dropdown">
+                            <li><a href="about.html">Our Story</a></li>
+                            <li><a href="about.html#leadership">Leadership</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="teams.html">Teams</a>
+                        <ul class="nav-dropdown">
+                            <li><a href="team-valorant.html">VALORANT</a></li>
+                            <li><a href="team-valorant-gc.html">VALORANT GC</a></li>
+                            <li><a href="team-overwatch.html">OVERWATCH</a></li>
+                        </ul>
+                    </li>
                     <li><a href="news.html">News</a></li>
                     <li><a href="partners.html">Partners</a></li>
                     <li><a href="contact.html">Contact</a></li>
@@ -54,27 +77,27 @@
             <div class="roster-panel-body">
                 <h4>Players</h4>
                 <div class="rp-list">
-                    <div class="rp-entry rp-entry-card">
+                    <div class="rp-entry rp-entry-card" data-name="Kozin" data-role="Flex" data-pfp="assets/pfp/kozin.png" data-bio="Flex player for ROSO Esports VALORANT.">
                         <img src="assets/pfp/kozin.png" alt="Kozin" class="rp-pfp">
                         <span class="rp-tag">Flex</span>
                         <span class="rp-handle">Kozin</span>
                     </div>
-                    <div class="rp-entry rp-entry-card">
+                    <div class="rp-entry rp-entry-card" data-name="Dunks" data-role="Duelist" data-pfp="assets/pfp/dunks.jpg" data-bio="Duelist for ROSO Esports VALORANT.">
                         <img src="assets/pfp/dunks.jpg" alt="Dunks" class="rp-pfp">
                         <span class="rp-tag">Duelist</span>
                         <span class="rp-handle">Dunks</span>
                     </div>
-                    <div class="rp-entry rp-entry-card">
+                    <div class="rp-entry rp-entry-card" data-name="Ricky" data-role="Initiator (IGL)" data-pfp="assets/pfp/ricky.jpg" data-bio="Initiator and IGL for ROSO Esports VALORANT.">
                         <img src="assets/pfp/ricky.jpg" alt="Ricky" class="rp-pfp">
                         <span class="rp-tag">Initiator (IGL)</span>
                         <span class="rp-handle">Ricky</span>
                     </div>
-                    <div class="rp-entry rp-entry-card">
+                    <div class="rp-entry rp-entry-card" data-name="Fake" data-role="Smokes" data-pfp="assets/pfp/fake.jpg" data-bio="Smokes player for ROSO Esports VALORANT.">
                         <img src="assets/pfp/fake.jpg" alt="Fake" class="rp-pfp">
                         <span class="rp-tag">Smokes</span>
                         <span class="rp-handle">Fake</span>
                     </div>
-                    <div class="rp-entry rp-entry-card">
+                    <div class="rp-entry rp-entry-card" data-name="Aidan" data-role="Sentinel" data-pfp="assets/pfp/aidan.png" data-bio="Sentinel for ROSO Esports VALORANT.">
                         <img src="assets/pfp/aidan.png" alt="Aidan" class="rp-pfp">
                         <span class="rp-tag">Sentinel</span>
                         <span class="rp-handle">Aidan</span>
@@ -82,12 +105,12 @@
                 </div>
                 <h4>Staff</h4>
                 <div class="rp-list">
-                    <div class="rp-entry rp-entry-card">
+                    <div class="rp-entry rp-entry-card" data-name="Skel" data-role="Head Coach" data-pfp="assets/pfp/skel.svg" data-bio="Head Coach for ROSO Esports VALORANT.">
                         <img src="assets/pfp/skel.svg" alt="Skel" class="rp-pfp">
                         <span class="rp-tag">Head Coach</span>
                         <span class="rp-handle">Skel</span>
                     </div>
-                    <div class="rp-entry rp-entry-card">
+                    <div class="rp-entry rp-entry-card" data-name="zecK" data-role="Assistant Coach" data-pfp="assets/pfp/zeck.svg" data-bio="Assistant Coach for ROSO Esports VALORANT.">
                         <img src="assets/pfp/zeck.svg" alt="zecK" class="rp-pfp">
                         <span class="rp-tag">Assistant Coach</span>
                         <span class="rp-handle">zecK</span>
@@ -147,6 +170,18 @@
             </div>
         </div>
     </footer>
+
+    <!-- Player Profile Modal -->
+    <div class="player-modal-overlay" id="playerModalOverlay">
+        <div class="player-modal">
+            <button class="player-modal-close" id="playerModalClose">&times;</button>
+            <img src="" alt="" class="player-modal-pfp" id="playerModalPfp">
+            <h3 class="player-modal-name" id="playerModalName"></h3>
+            <span class="player-modal-role" id="playerModalRole"></span>
+            <p class="player-modal-bio" id="playerModalBio"></p>
+            <div class="player-modal-socials" id="playerModalSocials"></div>
+        </div>
+    </div>
 
     <script src="app.js"></script>
 </body>
