@@ -41,6 +41,10 @@ body {
     overflow-x: hidden;
 }
 
+body.menu-open {
+    overflow: hidden;
+}
+
 /* Container System */
 .container {
     max-width: 1400px;
