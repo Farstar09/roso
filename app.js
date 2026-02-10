@@ -341,7 +341,7 @@
         }
     };
     
-    // Site Loading Animation — plays only once on home page
+    // Site Loading Animation — plays once per browser session on home page
     const initSiteLoader = () => {
         const loader = document.getElementById('siteLoader');
         if (!loader) return;
@@ -351,26 +351,39 @@
                           window.location.pathname === '/index.html' ||
                           window.location.pathname.endsWith('/index.html');
         
-        // Check if loader has been shown before
-        const hasSeenLoader = localStorage.getItem('rosoLoaderShown') === 'true';
+        // Use sessionStorage so the loader plays once per browser session
+        const hasSeenLoader = sessionStorage.getItem('rosoLoaderShown') === 'true';
 
-        // Only show loader on home page and if not shown before
+        // Only show loader on home page and if not shown this session
         if (isHomePage && !hasSeenLoader) {
+            const loaderTotal = CONFIG.LOADER_DISPLAY_DURATION + CONFIG.LOADER_FADE_DURATION;
+            const heroContent = document.querySelector('.hero-content');
             window.addEventListener('load', () => {
                 setTimeout(() => {
                     loader.classList.add('loader-hidden');
                     setTimeout(() => loader.remove(), CONFIG.LOADER_FADE_DURATION);
-                    // Mark loader as shown
-                    localStorage.setItem('rosoLoaderShown', 'true');
+                    // Mark loader as shown for this session
+                    sessionStorage.setItem('rosoLoaderShown', 'true');
                 }, CONFIG.LOADER_DISPLAY_DURATION);
+                // Delay hero content until after loader finishes
+                if (heroContent) {
+                    setTimeout(() => {
+                        heroContent.classList.add('hero-content-visible');
+                    }, loaderTotal);
+                }
             });
         } else {
             // Hide loader immediately if not on home page or already shown
             loader.remove();
+            // Show hero content immediately (no loader delay)
+            const heroContent = document.querySelector('.hero-content');
+            if (heroContent) {
+                heroContent.classList.add('hero-content-visible');
+            }
         }
     };
 
-    // Under Development Popup — shows 2 seconds after intro animation finishes (only on home page first visit)
+    // Under Development Popup — shows 2 seconds after intro animation finishes (only on home page first visit per session)
     const initDevPopup = () => {
         const overlay = document.getElementById('devPopupOverlay');
         const closeBtn = document.getElementById('devPopupClose');
@@ -381,10 +394,10 @@
                           window.location.pathname === '/index.html' ||
                           window.location.pathname.endsWith('/index.html');
         
-        // Check if loader has been shown before
-        const hasSeenLoader = localStorage.getItem('rosoLoaderShown') === 'true';
+        // Use sessionStorage to match loader behavior
+        const hasSeenLoader = sessionStorage.getItem('rosoLoaderShown') === 'true';
 
-        // Only show popup on home page and if loader was just shown (first visit)
+        // Only show popup on home page and if loader was just shown (first visit this session)
         if (isHomePage && !hasSeenLoader) {
             const loaderTotal = CONFIG.LOADER_DISPLAY_DURATION + CONFIG.LOADER_FADE_DURATION;
             const popupDelay = loaderTotal + 2000;
@@ -445,6 +458,48 @@
         handleScroll();
     };
 
+    // Video Fullscreen Overlay — watch hero video with sound
+    const initVideoFullscreen = () => {
+        const openBtn = document.getElementById('heroVideoFullscreenBtn');
+        const overlay = document.getElementById('videoFullscreenOverlay');
+        const video = document.getElementById('vfoVideo');
+        const closeBtn = document.getElementById('vfoClose');
+        const backBtn = document.getElementById('vfoBack');
+        const skipBackBtn = document.getElementById('vfoSkipBack');
+        const skipForwardBtn = document.getElementById('vfoSkipForward');
+        if (!openBtn || !overlay || !video) return;
+
+        const openVideo = () => {
+            video.currentTime = 0;
+            video.muted = false;
+            overlay.classList.add('vfo-visible');
+            video.play();
+        };
+
+        const closeVideo = () => {
+            overlay.classList.remove('vfo-visible');
+            video.pause();
+            video.muted = true;
+        };
+
+        openBtn.addEventListener('click', openVideo);
+        if (closeBtn) closeBtn.addEventListener('click', closeVideo);
+        if (backBtn) backBtn.addEventListener('click', () => { video.currentTime = 0; });
+        if (skipBackBtn) skipBackBtn.addEventListener('click', () => { video.currentTime = Math.max(0, video.currentTime - 5); });
+        if (skipForwardBtn) skipForwardBtn.addEventListener('click', () => { video.currentTime = Math.min(video.duration, video.currentTime + 5); });
+
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) closeVideo();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (!overlay.classList.contains('vfo-visible')) return;
+            if (e.key === 'Escape') closeVideo();
+            if (e.key === 'ArrowRight') video.currentTime = Math.min(video.duration, video.currentTime + 5);
+            if (e.key === 'ArrowLeft') video.currentTime = Math.max(0, video.currentTime - 5);
+        });
+    };
+
     // Initialize all features
     const initializeApp = () => {
         initSiteLoader();
@@ -459,6 +514,7 @@
         initMouseTrail();
         initAboutReveal();
         initScrollIndicator();
+        initVideoFullscreen();
         
         console.log('%c🌹 ROSO Esports - Where Talent Blooms 🌹', 'color: #DC143C; font-size: 20px; font-weight: bold;');
         console.log('%cAwarding talent and determination with opportunities', 'color: #FF6B6B; font-size: 14px;');

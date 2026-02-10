@@ -64,6 +64,10 @@
             </video>
             <div class="hero-video-overlay"></div>
         </div>
+        <button class="hero-video-fullscreen-btn" id="heroVideoFullscreenBtn" aria-label="Watch video with sound">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Watch with Sound
+        </button>
         <div class="hero-bg"></div>
         <div class="container">
             <div class="hero-content">
@@ -76,6 +80,19 @@
             </div>
         </div>
     </section>
+
+    <!-- Video Fullscreen Overlay -->
+    <div class="video-fullscreen-overlay" id="videoFullscreenOverlay">
+        <button class="vfo-close" id="vfoClose" aria-label="Close video">&times;</button>
+        <video id="vfoVideo" playsinline>
+            <source src="rosomain.mp4" type="video/mp4">
+        </video>
+        <div class="vfo-controls">
+            <button class="vfo-btn" id="vfoBack">⟲ Back to Start</button>
+            <button class="vfo-btn" id="vfoSkipBack">−5s</button>
+            <button class="vfo-btn" id="vfoSkipForward">+5s</button>
+        </div>
+    </div>
 
     <!-- About Section -->
     <section id="about" class="about">
