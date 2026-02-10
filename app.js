@@ -64,13 +64,21 @@
     const initParallaxEffect = () => {
         const heroContent = document.querySelector('.hero-content');
         const heroBg = document.querySelector('.hero-bg');
+        let heroContentReady = false;
+
+        // Wait for the hero content slide-in animation to finish before enabling parallax on it
+        if (heroContent) {
+            heroContent.addEventListener('animationend', () => {
+                heroContentReady = true;
+            }, { once: true });
+        }
         
         window.addEventListener('scroll', () => {
             const scrollPosition = window.pageYOffset;
             const viewportHeight = window.innerHeight;
             
             if (scrollPosition < viewportHeight) {
-                if (heroContent) {
+                if (heroContent && heroContentReady) {
                     const contentOffset = scrollPosition * 0.5;
                     const contentOpacity = Math.max(0, 1 - (scrollPosition / viewportHeight) * 1.5);
                     heroContent.style.transform = `translateY(${contentOffset}px)`;
