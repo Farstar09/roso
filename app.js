@@ -481,11 +481,13 @@
         const backBtn = document.getElementById('vfoBack');
         const skipBackBtn = document.getElementById('vfoSkipBack');
         const skipForwardBtn = document.getElementById('vfoSkipForward');
+        const volumeSlider = document.getElementById('vfoVolume');
         if (!openBtn || !overlay || !video) return;
 
         const openVideo = () => {
             video.currentTime = 0;
             video.muted = false;
+            if (volumeSlider) video.volume = volumeSlider.value;
             overlay.classList.add('vfo-visible');
             video.play();
         };
@@ -501,6 +503,14 @@
         if (backBtn) backBtn.addEventListener('click', () => { video.currentTime = 0; });
         if (skipBackBtn) skipBackBtn.addEventListener('click', () => { video.currentTime = Math.max(0, video.currentTime - 5); });
         if (skipForwardBtn) skipForwardBtn.addEventListener('click', () => { video.currentTime = Math.min(video.duration, video.currentTime + 5); });
+
+        if (volumeSlider) {
+            volumeSlider.addEventListener('input', () => {
+                video.volume = volumeSlider.value;
+            });
+        }
+
+        video.addEventListener('ended', closeVideo);
 
         overlay.addEventListener('click', (e) => {
             if (e.target === overlay) closeVideo();

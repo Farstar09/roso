@@ -491,6 +491,9 @@ section {
     text-align: center;
     border: 1px solid rgba(255, 255, 255, 0.05);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .team-card:hover {
@@ -504,7 +507,10 @@ section {
 .team-icon {
     font-size: 3rem;
     margin-bottom: 1.5rem;
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90px;
 }
 
 .team-card h3 {
@@ -1062,7 +1068,10 @@ section {
 .team-icon {
     font-size: 3rem;
     margin-bottom: 1.5rem;
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90px;
 }
 
 ::selection {
@@ -2007,7 +2016,7 @@ section {
 }
 
 .rp-pfp.rp-pfp-top {
-    object-position: center top;
+    object-position: center center;
 }
 
 @media (max-width: 600px) {
@@ -2234,6 +2243,48 @@ section {
 
 .vfo-close:hover {
     background: rgba(220, 20, 60, 0.5);
+}
+
+.vfo-volume {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.vfo-volume-label {
+    color: #fff;
+    font-size: 1rem;
+    cursor: default;
+}
+
+.vfo-volume-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+}
+
+.vfo-volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    background: var(--primary-red);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.vfo-volume-slider::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    background: var(--primary-red);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
 }
 
 /* Respect user preference for reduced motion */
