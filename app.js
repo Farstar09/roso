@@ -524,6 +524,36 @@
         });
     };
 
+    // Mobile Hamburger Menu
+    const initMobileMenu = () => {
+        const hamburger = document.querySelector('.hamburger');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const overlay = document.querySelector('.mobile-menu-overlay');
+        if (!hamburger || !mobileMenu || !overlay) return;
+
+        const toggleMenu = () => {
+            const isActive = mobileMenu.classList.contains('active');
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = isActive ? '' : 'hidden';
+        };
+
+        const closeMenu = () => {
+            hamburger.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        };
+
+        hamburger.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', closeMenu);
+
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+    };
+
     // Initialize all features
     const initializeApp = () => {
         initSiteLoader();
@@ -539,6 +569,7 @@
         initAboutReveal();
         initScrollIndicator();
         initVideoFullscreen();
+        initMobileMenu();
         
         console.log('%c🌹 ROSO Esports - Where Talent Blooms 🌹', 'color: #DC143C; font-size: 20px; font-weight: bold;');
         console.log('%cAwarding talent and determination with opportunities', 'color: #FF6B6B; font-size: 14px;');
