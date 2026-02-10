@@ -1500,7 +1500,7 @@ section {
     background: linear-gradient(90deg, #DC143C, #FF6B6B);
     border-radius: 2px;
     box-shadow: 0 0 10px rgba(220, 20, 60, 0.6);
-    animation: loaderFill 2.7s ease forwards;
+    animation: loaderFill 2.2s ease forwards;
 }
 
 @keyframes loaderPulseGlow {
@@ -1885,21 +1885,23 @@ section {
 /* ── Scroll Indicator ── */
 .scroll-indicator {
     position: fixed;
-    right: 28px;
-    bottom: 32px;
+    top: 18px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-30px);
     z-index: 900;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 6px;
     opacity: 0;
-    transform: translateY(16px);
     transition: opacity 0.5s ease, transform 0.5s ease;
     pointer-events: none;
 }
 
 .scroll-indicator.scroll-indicator-visible {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateX(-50%) translateY(0);
+    animation: scrollIndicatorBounce 2s cubic-bezier(0.28, 0.84, 0.42, 1) infinite;
 }
 
 .scroll-indicator-text {
@@ -1924,12 +1926,14 @@ section {
     width: 16px;
     height: 16px;
     color: var(--primary-red);
-    animation: scrollArrowBounce 1.5s ease-in-out infinite;
 }
 
-@keyframes scrollArrowBounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(6px); }
+@keyframes scrollIndicatorBounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    30% { transform: translateX(-50%) translateY(10px); }
+    50% { transform: translateX(-50%) translateY(-4px); }
+    70% { transform: translateX(-50%) translateY(4px); }
+    85% { transform: translateX(-50%) translateY(-2px); }
 }
 
 /* ── Section Entrance Enhancements ── */
