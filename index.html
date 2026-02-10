@@ -163,14 +163,14 @@
                 <div class="header-line"></div>
             </div>
             <div class="teams-grid">
-                <a href="team-valorant.html" class="team-card-link">
+                <div class="team-card-link team-card-trigger" id="valorantCardTrigger" role="button" tabindex="0">
                 <div class="team-card">
                     <div class="team-icon"><img src="assets/team-icons/valorant.png" alt="VALORANT Team Icon" class="team-icon-img"></div>
                     <h3>VALORANT</h3>
                     <p>Our flagship roster competing in the highest tier of competitive VALORANT.</p>
                     <span class="team-link">View Roster →</span>
                 </div>
-                </a>
+                </div>
                 <a href="team-overwatch.html" class="team-card-link">
                 <div class="team-card">
                     <div class="team-icon"><img src="assets/team-icons/overwatch.png" alt="OVERWATCH Team Icon" class="team-icon-img"></div>
@@ -345,6 +345,26 @@
             </div>
         </div>
     </footer>
+
+    <!-- VALORANT Team Selector Popup -->
+    <div class="val-popup-overlay" id="valPopupOverlay">
+        <div class="val-popup">
+            <button class="val-popup-close" id="valPopupClose">&times;</button>
+            <div class="val-popup-icon"><img src="assets/team-icons/valorant.png" alt="VALORANT" class="val-popup-game-icon"></div>
+            <h3 class="val-popup-title">Choose a VALORANT Team</h3>
+            <p class="val-popup-text">Which roster would you like to view?</p>
+            <div class="val-popup-buttons">
+                <a href="team-valorant.html" class="val-popup-btn">
+                    <span class="val-popup-btn-label">Main Roster</span>
+                    <span class="val-popup-btn-sub">ROSO VALORANT</span>
+                </a>
+                <a href="team-valorant-gc.html" class="val-popup-btn">
+                    <span class="val-popup-btn-label">Game Changers</span>
+                    <span class="val-popup-btn-sub">ROSO GC</span>
+                </a>
+            </div>
+        </div>
+    </div>
 
     <script src="app.js"></script>
 </body>
