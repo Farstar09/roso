@@ -16,7 +16,7 @@
         YEAR_THRESHOLD: 2000,
         YEAR_COUNTER_DURATION: 800,
         REVEAL_STAGGER_DELAY: 0.25,
-        SCROLL_INDICATOR_TOP_THRESHOLD: 100,
+        SCROLL_INDICATOR_TOP_THRESHOLD: 0,
         SCROLL_INDICATOR_BOTTOM_OFFSET: 200
     };
     
@@ -461,7 +461,7 @@
         const handleScroll = () => {
             const scrollTop = window.pageYOffset;
             const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            if (scrollTop > CONFIG.SCROLL_INDICATOR_TOP_THRESHOLD && scrollTop < docHeight - CONFIG.SCROLL_INDICATOR_BOTTOM_OFFSET) {
+            if (scrollTop >= CONFIG.SCROLL_INDICATOR_TOP_THRESHOLD && scrollTop < docHeight - CONFIG.SCROLL_INDICATOR_BOTTOM_OFFSET) {
                 indicator.classList.add('scroll-indicator-visible');
             } else {
                 indicator.classList.remove('scroll-indicator-visible');
