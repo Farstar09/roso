@@ -524,6 +524,36 @@
         });
     };
 
+    // VALORANT Team Selector Popup
+    const initValPopup = () => {
+        const trigger = document.getElementById('valorantCardTrigger');
+        const overlay = document.getElementById('valPopupOverlay');
+        const closeBtn = document.getElementById('valPopupClose');
+        if (!trigger || !overlay || !closeBtn) return;
+
+        const openPopup = () => {
+            overlay.classList.add('popup-visible');
+        };
+
+        const closePopup = () => {
+            overlay.classList.remove('popup-visible');
+        };
+
+        trigger.addEventListener('click', openPopup);
+        trigger.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                openPopup();
+            } else if (e.key === ' ') {
+                e.preventDefault();
+                openPopup();
+            }
+        });
+        closeBtn.addEventListener('click', closePopup);
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) closePopup();
+        });
+    };
+
     // Initialize all features
     const initializeApp = () => {
         initSiteLoader();
@@ -539,6 +569,7 @@
         initAboutReveal();
         initScrollIndicator();
         initVideoFullscreen();
+        initValPopup();
         
         console.log('%c🌹 ROSO Esports - Where Talent Blooms 🌹', 'color: #DC143C; font-size: 20px; font-weight: bold;');
         console.log('%cAwarding talent and determination with opportunities', 'color: #FF6B6B; font-size: 14px;');
