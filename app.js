@@ -378,11 +378,11 @@
                     }
 
                     // Show hero content after the video's "ROSO 2026" fades out
-                    // (~4.5s after loader finishes to let the video intro play)
+                    // (~6.5s after loader finishes to let the video intro play)
                     if (heroContent) {
                         setTimeout(() => {
                             heroContent.classList.add('hero-content-visible');
-                        }, 4500);
+                        }, 6500);
                     }
                 }, CONFIG.LOADER_DISPLAY_DURATION);
             });
@@ -414,7 +414,7 @@
         // Only show popup on home page and if loader was just shown (first visit this session)
         if (isHomePage && !hasSeenLoader) {
             // Show popup 2s after hero content appears (loader + video intro + hero reveal)
-            const popupDelay = CONFIG.LOADER_DISPLAY_DURATION + 4500 + 2000;
+            const popupDelay = CONFIG.LOADER_DISPLAY_DURATION + 6500 + 2000;
 
             window.addEventListener('load', () => {
                 setTimeout(() => {
