@@ -7,7 +7,6 @@ ROSO Esports is a static website for an esports organization. The site is built 
 - **HTML5** — All pages are static `.html` files in the project root
 - **CSS** — `style.css` is the main stylesheet
 - **JavaScript** — `app.js` contains all interactive features (wrapped in an IIFE)
-- **Git LFS** — Used for video files (`.mp4`, `.webm`, `.mov`, `.avi`)
 
 ## Project Structure
 - `index.html` — Home page
