@@ -524,6 +524,50 @@
         });
     };
 
+    // Player Profile Modal
+    const initPlayerModal = () => {
+        const overlay = document.getElementById('playerModalOverlay');
+        const closeBtn = document.getElementById('playerModalClose');
+        if (!overlay || !closeBtn) return;
+
+        const pfpEl = document.getElementById('playerModalPfp');
+        const nameEl = document.getElementById('playerModalName');
+        const roleEl = document.getElementById('playerModalRole');
+        const bioEl = document.getElementById('playerModalBio');
+
+        const openModal = (card) => {
+            const name = card.dataset.name || '';
+            const role = card.dataset.role || '';
+            const pfp = card.dataset.pfp || '';
+            const bio = card.dataset.bio || '';
+
+            if (pfpEl) { pfpEl.src = pfp; pfpEl.alt = name; }
+            if (nameEl) nameEl.textContent = name;
+            if (roleEl) roleEl.textContent = role;
+            if (bioEl) bioEl.textContent = bio;
+
+            overlay.classList.add('player-modal-visible');
+        };
+
+        const closeModal = () => {
+            overlay.classList.remove('player-modal-visible');
+        };
+
+        document.querySelectorAll('.rp-entry-card[data-name]').forEach(card => {
+            card.addEventListener('click', () => openModal(card));
+        });
+
+        closeBtn.addEventListener('click', closeModal);
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) closeModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && overlay.classList.contains('player-modal-visible')) {
+                closeModal();
+            }
+        });
+    };
+
     // VALORANT Team Selector Popup
     const initValPopup = () => {
         const trigger = document.getElementById('valorantCardTrigger');
@@ -569,6 +613,7 @@
         initAboutReveal();
         initScrollIndicator();
         initVideoFullscreen();
+        initPlayerModal();
         initValPopup();
         
         console.log('%c🌹 ROSO Esports - Where Talent Blooms 🌹', 'color: #DC143C; font-size: 20px; font-weight: bold;');
