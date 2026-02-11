@@ -61,7 +61,7 @@ jobs:
       - name: Fetch repository
         uses: actions/checkout@v4
         with:
-          lfs: true
+          lfs: false
 
       - name: Prepare Pages
         uses: actions/configure-pages@v5
