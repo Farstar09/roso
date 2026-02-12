@@ -577,6 +577,10 @@
         
         if (!hamburger || !navMenu || !navOverlay) return;
 
+        // Guard against multiple initializations
+        if (hamburger.dataset.initialized === 'true') return;
+        hamburger.dataset.initialized = 'true';
+
         const toggleMenu = () => {
             hamburger.classList.toggle('active');
             navMenu.classList.toggle('nav-menu-open');
@@ -608,24 +612,32 @@
             const dropdown = link.querySelector('.nav-dropdown');
             if (dropdown) {
                 const parentLink = link.querySelector('a');
-                parentLink.addEventListener('click', (e) => {
+                // Store the handler to prevent duplicates
+                const handleClick = (e) => {
                     // Only prevent default if we're in mobile view (menu is visible as slide-in)
                     if (window.innerWidth <= 768) {
                         e.preventDefault();
                         link.classList.toggle('mobile-dropdown-open');
                     }
-                });
+                };
+                parentLink.addEventListener('click', handleClick);
             }
         });
 
-        // Close menu on window resize above 768px
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 768 && navMenu.classList.contains('nav-menu-open')) {
-                closeMenu();
-                // Remove all mobile-dropdown-open classes
-                navLinks.forEach(link => link.classList.remove('mobile-dropdown-open'));
-            }
-        });
+        // Debounced resize handler to prevent performance issues
+        let resizeTimeout;
+        const handleResize = () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                if (window.innerWidth > 768 && navMenu.classList.contains('nav-menu-open')) {
+                    closeMenu();
+                    // Remove all mobile-dropdown-open classes
+                    navLinks.forEach(link => link.classList.remove('mobile-dropdown-open'));
+                }
+            }, 150);
+        };
+        
+        window.addEventListener('resize', handleResize);
     };
 
     // VALORANT Team Chooser Popup

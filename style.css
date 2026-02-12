@@ -19,6 +19,9 @@
     --shadow-red-soft: 0 0 20px rgba(220, 20, 60, 0.6);
     --shadow-red-intense: 0 0 30px rgba(220, 20, 60, 0.8);
     --glow-red: 0 0 15px rgba(220, 20, 60, 0.5);
+    
+    /* Hamburger Menu Animation */
+    --hamburger-translate: 7px;
 }
 
 /* Base Reset */
@@ -222,7 +225,7 @@ a {
 }
 
 .nav-hamburger.active span:nth-child(1) {
-    transform: rotate(45deg) translate(7px, 7px);
+    transform: rotate(45deg) translate(var(--hamburger-translate), var(--hamburger-translate));
 }
 
 .nav-hamburger.active span:nth-child(2) {
@@ -230,7 +233,7 @@ a {
 }
 
 .nav-hamburger.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -7px);
+    transform: rotate(-45deg) translate(var(--hamburger-translate), calc(-1 * var(--hamburger-translate)));
 }
 
 /* ── Mobile Navigation Overlay ── */
