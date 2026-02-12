@@ -181,17 +181,40 @@
     };
     
     // Intersection Observer for Fade-In Animations
-    // Simplified to show all elements immediately for reliability
-    // Previous complex viewport detection was causing visibility issues
-    // This ensures team cards and other elements are always visible
     const initScrollAnimations = () => {
+        const observerConfig = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const animationObserver = new IntersectionObserver(handleIntersection, observerConfig);
+        
         const elementsToAnimate = document.querySelectorAll('.team-card, .news-card, .partner-logo');
         
-        elementsToAnimate.forEach((element) => {
-            // Ensure all elements are visible
-            element.style.opacity = '1';
-            element.style.transform = 'translateY(0)';
+        elementsToAnimate.forEach((element, index) => {
+            // Skip animation for Twitter embed card (it should be visible immediately)
+            if (element.classList.contains('twitter-embed-card')) {
+                return;
+            }
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(30px)';
+            element.style.transition = 'opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+            element.dataset.animationDelay = index;
+            animationObserver.observe(element);
         });
+        
+        function handleIntersection(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const delayIndex = parseInt(entry.target.dataset.animationDelay) || 0;
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, delayIndex * 100);
+                    animationObserver.unobserve(entry.target);
+                }
+            });
+        }
     };
     
     // Animated Counter for Statistics
@@ -326,42 +349,6 @@
         }
     };
     
-    // Hero Video Error Handling
-    const initHeroVideoErrorHandling = () => {
-        const heroVideo = document.querySelector('.hero-bg-video');
-        const heroVideoWrap = document.querySelector('.hero-video-wrap');
-        const fullscreenBtn = document.getElementById('heroVideoFullscreenBtn');
-        const heroContent = document.querySelector('.hero-content');
-        
-        if (!heroVideo) return;
-        
-        // Helper function to handle video failure
-        const handleVideoFailure = () => {
-            console.log('Hero video failed to load, using gradient background fallback');
-            // Hide the video wrap to show the gradient background
-            if (heroVideoWrap) {
-                heroVideoWrap.style.display = 'none';
-            }
-            // Hide the fullscreen button since there's no video
-            if (fullscreenBtn) {
-                fullscreenBtn.style.display = 'none';
-            }
-            // Show hero content immediately instead of waiting
-            if (heroContent) {
-                heroContent.classList.add('hero-content-visible');
-            }
-        };
-        
-        // Handle video loading errors
-        heroVideo.addEventListener('error', handleVideoFailure);
-        
-        // Also check if video source fails to load
-        const videoSource = heroVideo.querySelector('source');
-        if (videoSource) {
-            videoSource.addEventListener('error', handleVideoFailure);
-        }
-    };
-    
     // Site Loading Animation — plays once per browser session on home page
     const initSiteLoader = () => {
         const loader = document.getElementById('siteLoader');
@@ -395,20 +382,14 @@
                     // Start video playback after loader finishes
                     if (heroVideo) {
                         heroVideo.currentTime = 0;
-                        heroVideo.play().catch(() => {
-                            // Play failed - error handler will show content
-                        });
+                        heroVideo.play().catch(() => {});
                     }
 
                     // Show hero content after the video's "ROSO 2026" fades out
                     // (~6.5s after loader finishes to let the video intro play)
-                    // If video fails, the error handler will show content immediately instead
                     if (heroContent) {
                         setTimeout(() => {
-                            // Only add class if not already added by error handler
-                            if (!heroContent.classList.contains('hero-content-visible')) {
-                                heroContent.classList.add('hero-content-visible');
-                            }
+                            heroContent.classList.add('hero-content-visible');
                         }, 6500);
                     }
                 }, CONFIG.LOADER_DISPLAY_DURATION);
@@ -692,7 +673,6 @@
 
     // Initialize all features
     const initializeApp = () => {
-        initHeroVideoErrorHandling();
         initSiteLoader();
         initDevPopup();
         initSmoothNavigation();
