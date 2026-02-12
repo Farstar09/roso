@@ -294,8 +294,10 @@ a {
     text-align: center;
     z-index: 2;
     position: relative;
-    opacity: 0;
-    transform: translateY(30px);
+    /* Start visible by default, animations will handle entry effects if needed */
+    opacity: 1;
+    transform: translateY(0);
+    animation: heroContentSlideIn 1s ease-out 0.3s both;
 }
 
 .hero-content.hero-content-visible {
@@ -303,6 +305,10 @@ a {
 }
 
 @keyframes heroContentSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
     to {
         opacity: 1;
         transform: translateY(0);
@@ -2294,6 +2300,7 @@ section {
     opacity: 0;
     transition: opacity 0.5s ease, transform 0.5s ease;
     pointer-events: none;
+    max-width: 150px; /* Prevent it from becoming too large */
 }
 
 .scroll-indicator.scroll-indicator-visible {
@@ -2323,7 +2330,12 @@ section {
 .scroll-indicator-arrow {
     width: 16px;
     height: 16px;
+    min-width: 16px;
+    min-height: 16px;
+    max-width: 16px;
+    max-height: 16px;
     color: var(--primary-red);
+    flex-shrink: 0;
 }
 
 @keyframes scrollIndicatorBounce {
@@ -2332,6 +2344,16 @@ section {
     50% { transform: translateX(-50%) translateY(-4px); }
     70% { transform: translateX(-50%) translateY(4px); }
     85% { transform: translateX(-50%) translateY(-2px); }
+}
+
+/* ── Fade-in Animation for Cards ── */
+.fade-in-element {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fade-in-element.fade-in-visible {
+    /* Already visible - no change needed */
 }
 
 /* ── Section Entrance Enhancements ── */
