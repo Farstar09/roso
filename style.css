@@ -966,13 +966,6 @@ section {
         display: block;
     }
     
-    /* Don't show dropdown on hover on mobile */
-    .nav-menu > li:hover .nav-dropdown {
-        opacity: 1;
-        visibility: visible;
-        transform: none;
-    }
-    
     .hero {
         min-height: 80vh;
         padding-top: 4rem;
