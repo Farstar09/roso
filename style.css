@@ -540,7 +540,7 @@ section {
 /* Teams grid — always show cards side by side, never single column */
 .teams-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 1.5rem;
 }
 
@@ -612,7 +612,7 @@ section {
 }
 
 .rosters-section .teams-grid .team-card-link {
-    flex: 1 1 200px;
+    flex: 1 1 180px;
     max-width: 280px;
 }
 
@@ -934,8 +934,8 @@ section {
     }
     
     .teams-grid {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        /* Do NOT set to 1fr single column */
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        /* Maintain horizontal layout to preserve design intent across all breakpoints */
     }
     
     .home-teams-grid {
@@ -965,7 +965,7 @@ section {
     }
     
     .teams-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     }
     
     /* Legacy text logo mobile style (kept for reference) */
