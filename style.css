@@ -595,8 +595,6 @@ section {
 /* Teams grid — always show cards side by side, never single column */
 .teams-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 1.5rem;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 2.5rem;
 }
@@ -1139,6 +1137,8 @@ section {
     
     .teams-grid {
         grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    }
+
     .rp-pfp {
         width: 48px;
         height: 48px;
@@ -1368,16 +1368,6 @@ section {
     .contact-grid {
         grid-template-columns: 1fr;
     }
-}
-
-/* Team logo containers */
-.team-icon {
-    font-size: 3rem;
-    margin-bottom: 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 120px; /* Extra space for visual breathing room around 110px image */
 }
 
 ::selection {
