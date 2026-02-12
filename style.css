@@ -471,25 +471,27 @@ section {
 
 .about-sides-layout {
     display: grid;
-    grid-template-columns: auto 1fr auto;
-    gap: 2rem;
-    align-items: center;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 3rem;
+    align-items: start;
     max-width: 1100px;
     margin-inline: auto;
+    padding-block: 2rem;
 }
 
 .about-side {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    align-items: center;
 }
 
 .about-side-left {
-    justify-self: start;
+    justify-self: center;
 }
 
 .about-side-right {
-    justify-self: end;
+    justify-self: center;
 }
 
 .about-center {
@@ -501,8 +503,9 @@ section {
 }
 
 .about-center-text {
-    max-width: 700px;
-    margin-top: 1.5rem;
+    max-width: 600px;
+    margin-top: 2rem;
+    text-align: center;
 }
 
 .about-center-text p {
@@ -551,6 +554,12 @@ section {
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.about-side .stat-item {
+    width: 100%;
+    max-width: 180px;
+    text-align: center;
+}
+
 .stat-item:hover {
     background: rgba(220, 20, 60, 0.1);
     border-color: var(--primary-red);
@@ -579,8 +588,11 @@ section {
     background: var(--surface-medium);
 }
 
+/* Teams grid — always show cards side by side, never single column */
 .teams-grid {
     display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 2.5rem;
 }
@@ -595,6 +607,8 @@ section {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
+    height: 100%;
 }
 
 .team-card:hover {
@@ -621,6 +635,7 @@ section {
     margin-bottom: 1rem;
     color: var(--primary-red);
     text-shadow: var(--glow-red);
+    min-height: 2em; /* Ensures consistent height regardless of text length */
 }
 
 .team-card p {
@@ -640,6 +655,47 @@ section {
     color: var(--accent-red-light);
     transform: translateX(5px);
 }
+
+/* On the dedicated teams page, ensure horizontal display */
+.rosters-section .teams-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.rosters-section .teams-grid .team-card-link {
+    flex: 1 1 180px;
+    max-width: 280px;
+}
+
+/* ── Twitter Embed Card (Home Page) ── */
+.twitter-embed-card {
+    grid-column: span 2;
+}
+
+.twitter-embed-card h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--primary-red);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.twitter-embed-wrapper {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(220, 20, 60, 0.2);
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/* Home page teams grid — 2 team cards + 1 wide twitter card */
+.home-teams-grid {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+
 
 /* News Section */
 .news {
@@ -888,12 +944,14 @@ section {
 @media (max-width: 1024px) {
     .about-sides-layout {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
+        gap: 2rem;
+        text-align: center;
     }
 
     .about-side {
         flex-direction: row;
         justify-content: center;
+        gap: 1.5rem;
     }
 
     .about-side-left,
@@ -901,7 +959,13 @@ section {
         justify-self: center;
     }
 
-    .about-center { grid-column: 1; }
+    .about-center { 
+        grid-column: 1; 
+    }
+    
+    .about-center-text {
+        margin-inline: auto;
+    }
     
     .news-grid {
         grid-template-columns: 1fr;
@@ -1017,7 +1081,16 @@ section {
     }
     
     .teams-grid {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        /* Maintain horizontal layout to preserve design intent across all breakpoints */
+    }
+    
+    .home-teams-grid {
         grid-template-columns: 1fr;
+    }
+    
+    .twitter-embed-card {
+        grid-column: span 1;
     }
     
     .newsletter-form {
@@ -1060,6 +1133,8 @@ section {
         padding-inline: 1rem;
     }
     
+    .teams-grid {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     .rp-pfp {
         width: 48px;
         height: 48px;
@@ -2289,7 +2364,7 @@ section {
 .team-card-link {
     text-decoration: none;
     color: inherit;
-    display: block;
+    display: flex;
 }
 
 /* ── Team Page Header (individual team pages) ── */

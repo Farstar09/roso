@@ -192,6 +192,10 @@
         const elementsToAnimate = document.querySelectorAll('.team-card, .news-card, .partner-logo');
         
         elementsToAnimate.forEach((element, index) => {
+            // Skip animation for Twitter embed card (it should be visible immediately)
+            if (element.classList.contains('twitter-embed-card')) {
+                return;
+            }
             element.style.opacity = '0';
             element.style.transform = 'translateY(30px)';
             element.style.transition = 'opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
@@ -275,6 +279,10 @@
         const teamCards = document.querySelectorAll('.team-card');
         
         teamCards.forEach(card => {
+            // Skip 3D tilt for Twitter embed card
+            if (card.classList.contains('twitter-embed-card')) {
+                return;
+            }
             card.addEventListener('mousemove', handleCardMouseMove);
             card.addEventListener('mouseleave', handleCardMouseLeave);
         });
