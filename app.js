@@ -181,40 +181,17 @@
     };
     
     // Intersection Observer for Fade-In Animations
+    // Simplified to show all elements immediately for reliability
+    // Previous complex viewport detection was causing visibility issues
+    // This ensures team cards and other elements are always visible
     const initScrollAnimations = () => {
-        const observerConfig = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-        
-        const animationObserver = new IntersectionObserver(handleIntersection, observerConfig);
-        
         const elementsToAnimate = document.querySelectorAll('.team-card, .news-card, .partner-logo');
         
-        elementsToAnimate.forEach((element, index) => {
-            // Skip animation for Twitter embed card (it should be visible immediately)
-            if (element.classList.contains('twitter-embed-card')) {
-                return;
-            }
-            element.style.opacity = '0';
-            element.style.transform = 'translateY(30px)';
-            element.style.transition = 'opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
-            element.dataset.animationDelay = index;
-            animationObserver.observe(element);
+        elementsToAnimate.forEach((element) => {
+            // Ensure all elements are visible
+            element.style.opacity = '1';
+            element.style.transform = 'translateY(0)';
         });
-        
-        function handleIntersection(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const delayIndex = parseInt(entry.target.dataset.animationDelay) || 0;
-                    setTimeout(() => {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }, delayIndex * 100);
-                    animationObserver.unobserve(entry.target);
-                }
-            });
-        }
     };
     
     // Animated Counter for Statistics

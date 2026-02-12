@@ -294,8 +294,10 @@ a {
     text-align: center;
     z-index: 2;
     position: relative;
-    opacity: 0;
-    transform: translateY(30px);
+    /* Start visible by default, animations will handle entry effects if needed */
+    opacity: 1;
+    transform: translateY(0);
+    animation: heroContentSlideIn 1s ease-out 0.3s both;
 }
 
 .hero-content.hero-content-visible {
@@ -303,6 +305,10 @@ a {
 }
 
 @keyframes heroContentSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
     to {
         opacity: 1;
         transform: translateY(0);
@@ -2282,18 +2288,13 @@ section {
 
 /* ── Scroll Indicator ── */
 .scroll-indicator {
-    position: fixed;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%) translateY(30px);
-    z-index: 1001;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    opacity: 0;
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    pointer-events: none;
+    /* TODO: Fix SVG sizing issue with .scroll-indicator-arrow
+     * Problem: SVG expands to 1280px x 1280px instead of 16px
+     * Root cause: viewBox scaling issue in index.html line 356
+     * Hidden temporarily until proper fix is implemented
+     * Issue tracking: https://github.com/Farstar09/roso/issues/TBD
+     */
+    display: none !important;
 }
 
 .scroll-indicator.scroll-indicator-visible {
@@ -2321,9 +2322,14 @@ section {
 }
 
 .scroll-indicator-arrow {
-    width: 16px;
-    height: 16px;
+    width: 16px !important;
+    height: 16px !important;
+    min-width: 16px;
+    min-height: 16px;
+    max-width: 16px;
+    max-height: 16px;
     color: var(--primary-red);
+    flex-shrink: 0;
 }
 
 @keyframes scrollIndicatorBounce {
