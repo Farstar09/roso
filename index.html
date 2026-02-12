@@ -77,15 +77,23 @@
                 <div class="nav-actions">
                     <a href="shop.html" class="btn-shop">Shop</a>
                 </div>
+                <button class="nav-hamburger" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
         </div>
     </nav>
+
+    <!-- Mobile Nav Overlay -->
+    <div class="nav-overlay"></div>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-video-wrap">
             <video class="hero-bg-video" autoplay muted loop playsinline>
-                <source src="rosomain.mp4" type="video/mp4">
+                <source src="https://drive.google.com/uc?export=download&id=1pZM7G64SjZHbtRGFGPmBZX0mYFfFKxPf" type="video/mp4">
             </video>
             <div class="hero-video-overlay"></div>
         </div>
@@ -110,7 +118,7 @@
     <div class="video-fullscreen-overlay" id="videoFullscreenOverlay">
         <button class="vfo-close" id="vfoClose" aria-label="Close video">&times;</button>
         <video id="vfoVideo" playsinline>
-            <source src="rosomain.mp4" type="video/mp4">
+            <source src="https://drive.google.com/uc?export=download&id=1pZM7G64SjZHbtRGFGPmBZX0mYFfFKxPf" type="video/mp4">
         </video>
         <div class="vfo-controls">
             <button class="vfo-btn" id="vfoBack">⟲ Back to Start</button>
@@ -186,14 +194,14 @@
                 <div class="header-line"></div>
             </div>
             <div class="teams-grid">
-                <a href="team-valorant.html" class="team-card-link">
+                <div id="valCardTrigger" class="team-card-link">
                 <div class="team-card">
                     <div class="team-icon"><img src="assets/team-icons/valorant.png" alt="VALORANT Team Icon" class="team-icon-img"></div>
                     <h3>VALORANT</h3>
                     <p>Our flagship roster competing in the highest tier of competitive VALORANT.</p>
                     <span class="team-link">View Roster →</span>
                 </div>
-                </a>
+                </div>
                 <a href="team-overwatch.html" class="team-card-link">
                 <div class="team-card">
                     <div class="team-icon"><img src="assets/team-icons/overwatch.png" alt="OVERWATCH Team Icon" class="team-icon-img"></div>
@@ -221,6 +229,22 @@
             </div>
         </div>
     </section>
+
+    <!-- VALORANT Team Chooser Popup -->
+    <div class="val-chooser-overlay" id="valChooserOverlay">
+        <div class="val-chooser-popup">
+            <button class="val-chooser-close" id="valChooserClose">&times;</button>
+            <div class="val-chooser-icon">
+                <img src="assets/team-icons/valorant.png" alt="VALORANT" style="width: 80px; height: 80px;">
+            </div>
+            <h3 class="val-chooser-title">Choose Your Team</h3>
+            <p class="val-chooser-text">Select which VALORANT roster you'd like to view:</p>
+            <div class="val-chooser-buttons">
+                <a href="team-valorant.html" class="btn btn-primary val-chooser-btn">Main Roster</a>
+                <a href="team-valorant-gc.html" class="btn btn-secondary val-chooser-btn">Game Changers</a>
+            </div>
+        </div>
+    </div>
 
     <!-- News Section -->
     <section id="news" class="news">

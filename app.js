@@ -568,6 +568,89 @@
         });
     };
 
+    // Mobile Navigation
+    const initMobileNav = () => {
+        const hamburger = document.querySelector('.nav-hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        const navOverlay = document.querySelector('.nav-overlay');
+        const navLinks = document.querySelectorAll('.nav-menu > li');
+        
+        if (!hamburger || !navMenu || !navOverlay) return;
+
+        const toggleMenu = () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('nav-menu-open');
+            navOverlay.classList.toggle('nav-overlay-visible');
+            
+            // Lock/unlock body scroll
+            if (navMenu.classList.contains('nav-menu-open')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        };
+
+        const closeMenu = () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('nav-menu-open');
+            navOverlay.classList.remove('nav-overlay-visible');
+            document.body.style.overflow = '';
+        };
+
+        // Toggle menu on hamburger click
+        hamburger.addEventListener('click', toggleMenu);
+
+        // Close menu on overlay click
+        navOverlay.addEventListener('click', closeMenu);
+
+        // Handle mobile dropdowns
+        navLinks.forEach(link => {
+            const dropdown = link.querySelector('.nav-dropdown');
+            if (dropdown) {
+                const parentLink = link.querySelector('a');
+                parentLink.addEventListener('click', (e) => {
+                    // Only prevent default if we're in mobile view (menu is visible as slide-in)
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        link.classList.toggle('mobile-dropdown-open');
+                    }
+                });
+            }
+        });
+
+        // Close menu on window resize above 768px
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768 && navMenu.classList.contains('nav-menu-open')) {
+                closeMenu();
+                // Remove all mobile-dropdown-open classes
+                navLinks.forEach(link => link.classList.remove('mobile-dropdown-open'));
+            }
+        });
+    };
+
+    // VALORANT Team Chooser Popup
+    const initValChooser = () => {
+        const trigger = document.getElementById('valCardTrigger');
+        const overlay = document.getElementById('valChooserOverlay');
+        const closeBtn = document.getElementById('valChooserClose');
+        if (!trigger || !overlay) return;
+
+        trigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            overlay.classList.add('val-chooser-visible');
+        });
+
+        const closePopup = () => overlay.classList.remove('val-chooser-visible');
+
+        if (closeBtn) closeBtn.addEventListener('click', closePopup);
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) closePopup();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && overlay.classList.contains('val-chooser-visible')) closePopup();
+        });
+    };
+
     // Initialize all features
     const initializeApp = () => {
         initSiteLoader();
@@ -584,6 +667,8 @@
         initScrollIndicator();
         initVideoFullscreen();
         initPlayerModal();
+        initValChooser();
+        initMobileNav();
         
         console.log('%c🌹 ROSO Esports - Where Talent Blooms 🌹', 'color: #DC143C; font-size: 20px; font-weight: bold;');
         console.log('%cAwarding talent and determination with opportunities', 'color: #FF6B6B; font-size: 14px;');
