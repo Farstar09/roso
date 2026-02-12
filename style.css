@@ -2288,7 +2288,12 @@ section {
 
 /* ── Scroll Indicator ── */
 .scroll-indicator {
-    /* Temporarily hidden due to sizing issues - to be fixed later */
+    /* TODO: Fix SVG sizing issue with .scroll-indicator-arrow
+     * Problem: SVG expands to 1280px x 1280px instead of 16px
+     * Root cause: viewBox scaling issue in index.html line 356
+     * Hidden temporarily until proper fix is implemented
+     * Issue tracking: https://github.com/Farstar09/roso/issues/TBD
+     */
     display: none !important;
 }
 
@@ -2333,16 +2338,6 @@ section {
     50% { transform: translateX(-50%) translateY(-4px); }
     70% { transform: translateX(-50%) translateY(4px); }
     85% { transform: translateX(-50%) translateY(-2px); }
-}
-
-/* ── Fade-in Animation for Cards ── */
-.fade-in-element {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.fade-in-element.fade-in-visible {
-    /* Already visible - no change needed */
 }
 
 /* ── Section Entrance Enhancements ── */

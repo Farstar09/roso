@@ -181,9 +181,10 @@
     };
     
     // Intersection Observer for Fade-In Animations
+    // Simplified to show all elements immediately for reliability
+    // Previous complex viewport detection was causing visibility issues
+    // This ensures team cards and other elements are always visible
     const initScrollAnimations = () => {
-        // Simplified: Just show all elements immediately for now
-        // Animation system was causing visibility issues
         const elementsToAnimate = document.querySelectorAll('.team-card, .news-card, .partner-logo');
         
         elementsToAnimate.forEach((element) => {
