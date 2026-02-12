@@ -893,6 +893,16 @@ section {
         padding-inline: 1rem;
     }
     
+    .rp-pfp {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .player-modal-pfp {
+        width: 80px;
+        height: 80px;
+    }
+    
     /* Legacy text logo mobile style (kept for reference) */
     /*
     .logo-text {
@@ -2060,9 +2070,11 @@ section {
     width: 56px;
     height: 56px;
     object-fit: cover;
+    object-position: center top;
     border-radius: 8px;
     border: 1px solid rgba(220, 20, 60, 0.3);
     flex-shrink: 0;
+    background: #1a1a1a;
 }
 
 .rp-pfp.rp-pfp-top {
@@ -2478,11 +2490,13 @@ section {
 }
 
 .player-modal-pfp {
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
     object-fit: cover;
-    border-radius: 16px;
-    border: 2px solid rgba(220, 20, 60, 0.5);
+    object-position: center top;
+    border-radius: 12px;
+    border: 2px solid rgba(220, 20, 60, 0.4);
+    background: #1a1a1a;
     margin-bottom: 1rem;
     box-shadow: 0 0 20px rgba(220, 20, 60, 0.25);
 }
