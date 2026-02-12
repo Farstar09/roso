@@ -354,11 +354,12 @@
         const heroVideo = document.querySelector('.hero-bg-video');
         const heroVideoWrap = document.querySelector('.hero-video-wrap');
         const fullscreenBtn = document.getElementById('heroVideoFullscreenBtn');
+        const heroContent = document.querySelector('.hero-content');
         
         if (!heroVideo) return;
         
-        // Handle video loading errors
-        heroVideo.addEventListener('error', () => {
+        // Helper function to handle video failure
+        const handleVideoFailure = () => {
             console.log('Hero video failed to load, using gradient background fallback');
             // Hide the video wrap to show the gradient background
             if (heroVideoWrap) {
@@ -368,20 +369,19 @@
             if (fullscreenBtn) {
                 fullscreenBtn.style.display = 'none';
             }
-        });
+            // Show hero content immediately instead of waiting
+            if (heroContent) {
+                heroContent.classList.add('hero-content-visible');
+            }
+        };
+        
+        // Handle video loading errors
+        heroVideo.addEventListener('error', handleVideoFailure);
         
         // Also check if video source fails to load
         const videoSource = heroVideo.querySelector('source');
         if (videoSource) {
-            videoSource.addEventListener('error', () => {
-                console.log('Hero video source failed to load, using gradient background fallback');
-                if (heroVideoWrap) {
-                    heroVideoWrap.style.display = 'none';
-                }
-                if (fullscreenBtn) {
-                    fullscreenBtn.style.display = 'none';
-                }
-            });
+            videoSource.addEventListener('error', handleVideoFailure);
         }
     };
     
@@ -418,28 +418,21 @@
                     // Start video playback after loader finishes
                     if (heroVideo) {
                         heroVideo.currentTime = 0;
-                        const playPromise = heroVideo.play();
-                        
-                        if (playPromise !== undefined) {
-                            playPromise.catch(() => {
-                                // Video failed to play, show content immediately
-                                if (heroContent) {
-                                    heroContent.classList.add('hero-content-visible');
-                                }
-                            });
-                        }
+                        heroVideo.play().catch(() => {
+                            // Play failed - error handler will show content
+                        });
                     }
 
                     // Show hero content after the video's "ROSO 2026" fades out
                     // (~6.5s after loader finishes to let the video intro play)
-                    // But only if video is actually playing
-                    if (heroContent && heroVideo && !heroVideo.error) {
+                    // If video fails, the error handler will show content immediately instead
+                    if (heroContent) {
                         setTimeout(() => {
-                            heroContent.classList.add('hero-content-visible');
+                            // Only add class if not already added by error handler
+                            if (!heroContent.classList.contains('hero-content-visible')) {
+                                heroContent.classList.add('hero-content-visible');
+                            }
                         }, 6500);
-                    } else if (heroContent) {
-                        // No video or video error, show content immediately
-                        heroContent.classList.add('hero-content-visible');
                     }
                 }, CONFIG.LOADER_DISPLAY_DURATION);
             });
