@@ -283,9 +283,8 @@ a {
     position: absolute;
     inset: 0;
     background: 
-        radial-gradient(circle at 30% 40%, rgba(220, 20, 60, 0.2) 0%, transparent 50%),
-        radial-gradient(circle at 70% 60%, rgba(139, 0, 0, 0.15) 0%, transparent 50%),
-        linear-gradient(180deg, rgba(10, 10, 10, 0.95) 0%, rgba(18, 18, 18, 0.98) 100%);
+        radial-gradient(circle at 20% 50%, rgba(220, 20, 60, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, rgba(139, 0, 0, 0.1) 0%, transparent 50%);
     z-index: 0;
     pointer-events: none;
 }
@@ -294,10 +293,8 @@ a {
     text-align: center;
     z-index: 2;
     position: relative;
-    /* Start visible by default, animations will handle entry effects if needed */
-    opacity: 1;
-    transform: translateY(0);
-    animation: heroContentSlideIn 1s ease-out 0.3s both;
+    opacity: 0;
+    transform: translateY(30px);
 }
 
 .hero-content.hero-content-visible {
@@ -305,10 +302,6 @@ a {
 }
 
 @keyframes heroContentSlideIn {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
     to {
         opacity: 1;
         transform: translateY(0);
@@ -477,67 +470,58 @@ section {
 }
 
 .about-sides-layout {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 900px;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 3rem;
+    align-items: start;
+    max-width: 1100px;
     margin-inline: auto;
     padding-block: 2rem;
-    gap: 3rem;
 }
 
 .about-side {
-    display: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
 }
 
 .about-side-left {
-    display: none;
+    justify-self: center;
 }
 
 .about-side-right {
-    display: none;
+    justify-self: center;
 }
 
 .about-center {
+    grid-column: 2;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    width: 100%;
 }
 
 .about-center-text {
-    max-width: 700px;
-    margin-top: 2.5rem;
-    text-align: left;
+    max-width: 600px;
+    margin-top: 2rem;
+    text-align: center;
 }
 
 .about-center-text p {
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 400;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 300;
     color: var(--text-secondary);
     margin-bottom: 1.5rem;
-    line-height: 1.8;
-    letter-spacing: 0.01em;
+    line-height: 1.9;
+    letter-spacing: 0.02em;
+    border-left: 3px solid var(--primary-red);
+    padding-left: 1.25rem;
     background: linear-gradient(90deg, rgba(220, 20, 60, 0.06), transparent);
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     text-align: left;
-}
-
-.about-stats-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
-    margin-top: 3rem;
-    width: 100%;
-    max-width: 900px;
-}
-
-.about-stats-grid .stat-item {
-    width: 100%;
-    max-width: none;
 }
 
 .about-text p {
@@ -959,14 +943,26 @@ section {
 /* Responsive Design */
 @media (max-width: 1024px) {
     .about-sides-layout {
+        grid-template-columns: 1fr;
         gap: 2rem;
+        text-align: center;
     }
 
-    .about-stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.25rem;
+    .about-side {
+        flex-direction: row;
+        justify-content: center;
+        gap: 1.5rem;
     }
 
+    .about-side-left,
+    .about-side-right {
+        justify-self: center;
+    }
+
+    .about-center { 
+        grid-column: 1; 
+    }
+    
     .about-center-text {
         margin-inline: auto;
     }
@@ -1056,17 +1052,6 @@ section {
     
     .stat-number {
         font-size: 2rem;
-    }
-    
-    .about-stats-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-        margin-top: 2rem;
-    }
-    
-    .about-center-text {
-        max-width: 100%;
-        padding: 0 1rem;
     }
     
     .partners-grid {
@@ -2288,13 +2273,18 @@ section {
 
 /* ── Scroll Indicator ── */
 .scroll-indicator {
-    /* TODO: Fix SVG sizing issue with .scroll-indicator-arrow
-     * Problem: SVG expands to 1280px x 1280px instead of 16px
-     * Root cause: viewBox scaling issue in index.html line 356
-     * Hidden temporarily until proper fix is implemented
-     * Issue tracking: https://github.com/Farstar09/roso/issues/TBD
-     */
-    display: none !important;
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%) translateY(30px);
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    pointer-events: none;
 }
 
 .scroll-indicator.scroll-indicator-visible {
@@ -2322,14 +2312,9 @@ section {
 }
 
 .scroll-indicator-arrow {
-    width: 16px !important;
-    height: 16px !important;
-    min-width: 16px;
-    min-height: 16px;
-    max-width: 16px;
-    max-height: 16px;
+    width: 16px;
+    height: 16px;
     color: var(--primary-red);
-    flex-shrink: 0;
 }
 
 @keyframes scrollIndicatorBounce {
