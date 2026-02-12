@@ -349,6 +349,42 @@
         }
     };
     
+    // Hero Video Error Handling
+    const initHeroVideoErrorHandling = () => {
+        const heroVideo = document.querySelector('.hero-bg-video');
+        const heroVideoWrap = document.querySelector('.hero-video-wrap');
+        const fullscreenBtn = document.getElementById('heroVideoFullscreenBtn');
+        
+        if (!heroVideo) return;
+        
+        // Handle video loading errors
+        heroVideo.addEventListener('error', () => {
+            console.log('Hero video failed to load, using gradient background fallback');
+            // Hide the video wrap to show the gradient background
+            if (heroVideoWrap) {
+                heroVideoWrap.style.display = 'none';
+            }
+            // Hide the fullscreen button since there's no video
+            if (fullscreenBtn) {
+                fullscreenBtn.style.display = 'none';
+            }
+        });
+        
+        // Also check if video source fails to load
+        const videoSource = heroVideo.querySelector('source');
+        if (videoSource) {
+            videoSource.addEventListener('error', () => {
+                console.log('Hero video source failed to load, using gradient background fallback');
+                if (heroVideoWrap) {
+                    heroVideoWrap.style.display = 'none';
+                }
+                if (fullscreenBtn) {
+                    fullscreenBtn.style.display = 'none';
+                }
+            });
+        }
+    };
+    
     // Site Loading Animation — plays once per browser session on home page
     const initSiteLoader = () => {
         const loader = document.getElementById('siteLoader');
@@ -382,15 +418,28 @@
                     // Start video playback after loader finishes
                     if (heroVideo) {
                         heroVideo.currentTime = 0;
-                        heroVideo.play().catch(() => {});
+                        const playPromise = heroVideo.play();
+                        
+                        if (playPromise !== undefined) {
+                            playPromise.catch(() => {
+                                // Video failed to play, show content immediately
+                                if (heroContent) {
+                                    heroContent.classList.add('hero-content-visible');
+                                }
+                            });
+                        }
                     }
 
                     // Show hero content after the video's "ROSO 2026" fades out
                     // (~6.5s after loader finishes to let the video intro play)
-                    if (heroContent) {
+                    // But only if video is actually playing
+                    if (heroContent && heroVideo && !heroVideo.error) {
                         setTimeout(() => {
                             heroContent.classList.add('hero-content-visible');
                         }, 6500);
+                    } else if (heroContent) {
+                        // No video or video error, show content immediately
+                        heroContent.classList.add('hero-content-visible');
                     }
                 }, CONFIG.LOADER_DISPLAY_DURATION);
             });
@@ -673,6 +722,7 @@
 
     // Initialize all features
     const initializeApp = () => {
+        initHeroVideoErrorHandling();
         initSiteLoader();
         initDevPopup();
         initSmoothNavigation();
