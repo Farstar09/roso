@@ -706,7 +706,7 @@ section {
 
 .news-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 2rem;
 }
 
@@ -777,6 +777,24 @@ section {
 .news-date {
     color: var(--text-tertiary);
     font-size: 0.85rem;
+}
+
+/* News Twitter Embed */
+.news-twitter-embed {
+    padding: 2rem;
+}
+
+.news-twitter-embed:hover {
+    transform: none;
+}
+
+.news-twitter-embed h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--primary-red);
+    margin-bottom: 1rem;
+    text-align: center;
 }
 
 /* Partners Section */
@@ -1530,7 +1548,7 @@ section {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 0.75rem;
+    gap: 1.5rem;
 }
 
 .rp-entry {
@@ -1548,10 +1566,11 @@ section {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 2rem 1.25rem;
-    min-width: 160px;
-    gap: 0.5rem;
-    border-radius: 0.75rem;
+    padding: 2.5rem 1.75rem;
+    flex: 0 1 calc(20% - 1.5rem);
+    min-width: 200px;
+    gap: 0.75rem;
+    border-radius: 1rem;
     transition: all 0.3s ease;
 }
 
@@ -1562,15 +1581,15 @@ section {
 }
 
 .rp-entry.rp-entry-card .rp-pfp {
-    width: 120px;
-    height: 120px;
+    width: 160px;
+    height: 160px;
     border-radius: 12px;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.5rem;
     object-fit: cover;
 }
 
 .rp-tag {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     font-weight: 700;
     text-transform: uppercase;
     color: var(--primary-red);
@@ -1580,7 +1599,8 @@ section {
 
 .rp-handle {
     color: var(--text-secondary);
-    font-size: 0.9rem;
+    font-size: 1.1rem;
+    font-weight: 600;
 }
 
 /* ── Newsfeed Section (News Page) ── */
