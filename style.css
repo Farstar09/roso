@@ -379,6 +379,11 @@ a {
 }
 
 /* ── Golden Contributors Button ── */
+.contributors-button-wrapper {
+    text-align: center;
+    margin-top: 2.5rem;
+}
+
 .btn-contributors {
     background: linear-gradient(135deg, #FFD700 0%, #DAA520 100%);
     color: #0a0a0a;
