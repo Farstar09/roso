@@ -2411,7 +2411,7 @@ section {
 }
 
 .rp-pfp.rp-pfp-top {
-    object-position: center center;
+    object-position: center top;
 }
 
 @media (max-width: 600px) {
@@ -2552,6 +2552,7 @@ section {
     cursor: pointer;
     transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
     backdrop-filter: blur(4px);
+    animation: watchBtnBounce 2s ease-in-out infinite;
 }
 
 .hero-video-fullscreen-btn:hover {
@@ -2564,6 +2565,15 @@ section {
     width: 16px;
     height: 16px;
     flex-shrink: 0;
+}
+
+@keyframes watchBtnBounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
 }
 
 /* ── Video Fullscreen Overlay ── */
@@ -2764,6 +2774,134 @@ section {
     color: var(--text-secondary);
     text-transform: uppercase;
     letter-spacing: 0.05em;
+}
+
+/* ── Shop Section ── */
+.shop-section {
+    padding: 4rem 0 6rem;
+    background: var(--surface-darkest);
+}
+
+.shop-filters {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.shop-filter-btn {
+    padding: 0.75rem 1.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: var(--text-secondary);
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.shop-filter-btn:hover {
+    background: rgba(220, 20, 60, 0.1);
+    border-color: rgba(220, 20, 60, 0.3);
+    color: var(--text-primary);
+}
+
+.shop-filter-btn.active {
+    background: rgba(220, 20, 60, 0.2);
+    border-color: var(--primary-red);
+    color: var(--primary-red);
+    box-shadow: 0 0 16px rgba(220, 20, 60, 0.3);
+}
+
+.shop-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.shop-product-card {
+    background: linear-gradient(160deg, #1a1a1a 0%, #0d0d0d 100%);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.shop-product-card:hover {
+    border-color: var(--primary-red);
+    box-shadow: 0 8px 24px rgba(220, 20, 60, 0.2);
+    transform: translateY(-4px);
+}
+
+.shop-product-image {
+    width: 100%;
+    height: 300px;
+    background: linear-gradient(135deg, rgba(220, 20, 60, 0.15) 0%, rgba(13, 13, 13, 0.8) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.shop-product-info {
+    padding: 1.5rem;
+}
+
+.shop-product-name {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.shop-product-price {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary-red);
+    margin-bottom: 1rem;
+}
+
+.shop-add-to-cart {
+    display: inline-block;
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+    background: var(--primary-red);
+    color: var(--text-primary);
+    border: none;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.shop-add-to-cart:hover {
+    background: #e01448;
+    box-shadow: 0 4px 16px rgba(220, 20, 60, 0.4);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .shop-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 1.5rem;
+    }
+    
+    .shop-product-image {
+        height: 240px;
+    }
 }
 
 /* ── Player Profile Modal ── */
