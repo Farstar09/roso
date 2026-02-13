@@ -3082,3 +3082,165 @@ section {
     align-items: center;
     gap: 0.5rem;
 }
+
+/* ── Events Section (Events Page) ── */
+.events-section {
+    padding-block: 5rem;
+    background: var(--surface-darkest);
+}
+
+.events-grid {
+    display: grid;
+    gap: 2rem;
+    max-width: 1000px;
+    margin-inline: auto;
+}
+
+.event-card {
+    background: linear-gradient(145deg, rgba(15, 15, 15, 0.9), rgba(30, 30, 30, 0.9));
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.event-card:hover {
+    border-color: var(--primary-red);
+    box-shadow: 0 8px 32px rgba(220, 20, 60, 0.25);
+    transform: translateY(-4px);
+}
+
+.event-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 1.75rem;
+    background: linear-gradient(135deg, rgba(220, 20, 60, 0.08), rgba(139, 0, 0, 0.05));
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.event-status {
+    display: inline-block;
+    padding: 0.35rem 0.9rem;
+    border-radius: 1.25rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.status-upcoming {
+    background: var(--primary-red);
+    color: var(--text-primary);
+    box-shadow: 0 0 12px rgba(220, 20, 60, 0.4);
+}
+
+.status-live {
+    background: #00ff88;
+    color: #000;
+    animation: statusPulse 2s ease-in-out infinite;
+    box-shadow: 0 0 16px rgba(0, 255, 136, 0.6);
+}
+
+@keyframes statusPulse {
+    0%, 100% {
+        box-shadow: 0 0 16px rgba(0, 255, 136, 0.6);
+        opacity: 1;
+    }
+    50% {
+        box-shadow: 0 0 24px rgba(0, 255, 136, 0.9);
+        opacity: 0.9;
+    }
+}
+
+.status-completed {
+    background: rgba(128, 128, 128, 0.3);
+    color: var(--text-tertiary);
+    border: 1px solid rgba(128, 128, 128, 0.2);
+}
+
+.event-game {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.event-body {
+    padding: 2rem 1.75rem;
+}
+
+.event-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+}
+
+.event-format {
+    font-size: 0.85rem;
+    color: var(--primary-red);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.event-date {
+    font-size: 0.88rem;
+    color: var(--text-tertiary);
+    margin-bottom: 1rem;
+}
+
+.event-desc {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.event-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary-red);
+    font-weight: 600;
+    font-size: 0.92rem;
+    transition: gap 0.3s ease;
+}
+
+.event-link:hover {
+    gap: 0.75rem;
+}
+
+/* ── Events Responsive ── */
+@media (max-width: 768px) {
+    .event-header {
+        flex-direction: column;
+        gap: 0.75rem;
+        align-items: flex-start;
+    }
+    
+    .event-title {
+        font-size: 1.2rem;
+    }
+    
+    .event-body {
+        padding: 1.5rem 1.25rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .events-section {
+        padding-block: 3rem;
+    }
+    
+    .event-title {
+        font-size: 1.1rem;
+    }
+    
+    .event-desc {
+        font-size: 0.9rem;
+    }
+}
