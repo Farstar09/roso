@@ -3,12 +3,369 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ROSO</title>
+    <title>ROSO Esports - Where Talent Blooms</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <video id="hero-video" src="https://archive.org/download/rosomain/rosomain.mp4" controls></video>
-    <div id="fullscreen-video-overlay">
-        <video id="fullscreen-video" src="https://archive.org/download/rosomain/rosomain.mp4" controls></video>
+    <!-- Site Loading Animation -->
+    <div class="site-loader" id="siteLoader">
+        <div class="loader-logo">ROSO</div>
+        <div class="loader-subtitle">Where Talent Blooms</div>
+        <div class="loader-bar-track">
+            <div class="loader-bar-fill"></div>
+        </div>
     </div>
+
+    <!-- Under Development Popup -->
+    <div class="dev-popup-overlay" id="devPopupOverlay">
+        <div class="dev-popup">
+            <button class="dev-popup-close" id="devPopupClose">&times;</button>
+            <div class="dev-popup-icon">🚧</div>
+            <h3 class="dev-popup-title">Under Development</h3>
+            <p class="dev-popup-text">This site is currently under development and being actively coded by <strong>Star</strong>.</p>
+            <p class="dev-popup-text">Found a bug or have a suggestion? Send them to:</p>
+            <div class="dev-popup-discord"><span class="dev-popup-discord-icon">💬</span> st4r.1</div>
+            <p class="dev-popup-subtext">on Discord</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="#home">
+                        <img src="roso-logo.png" alt="ROSO Esports" class="logo-image">
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li>
+                        <a href="#home">Home</a>
+                        <ul class="nav-dropdown">
+                            <li><a href="#about">Who We Are</a></li>
+                            <li><a href="#teams">Our Teams</a></li>
+                            <li><a href="#news">Latest News</a></li>
+                            <li><a href="#partners">Partners</a></li>
+                            <li><a href="#discord">Discord</a></li>
+                            <li><a href="#contact">Stay Connected</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="about.html">About</a>
+                        <ul class="nav-dropdown">
+                            <li><a href="about.html">Our Story</a></li>
+                            <li><a href="about.html#leadership">Leadership</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="teams.html">Teams</a>
+                        <ul class="nav-dropdown">
+                            <li><a href="team-valorant.html">VALORANT</a></li>
+                            <li><a href="team-valorant-gc.html">VALORANT GC</a></li>
+                            <li><a href="team-overwatch.html">OVERWATCH</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="partners.html">Partners</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <a href="shop.html" class="btn-shop">Shop</a>
+                </div>
+                <button class="nav-hamburger" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Nav Overlay -->
+    <div class="nav-overlay"></div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-video-wrap">
+            <video class="hero-bg-video" autoplay muted loop playsinline>
+                <source src="https://archive.org/download/rosomain/rosomain.mp4" type="video/mp4">
+            </video>
+            <div class="hero-video-overlay"></div>
+        </div>
+        <button class="hero-video-fullscreen-btn" id="heroVideoFullscreenBtn" aria-label="Watch video with sound">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Watch with Sound
+        </button>
+        <div class="hero-bg"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">WHERE TALENT BLOOMS</h1>
+                <p class="hero-subtitle">Awarding talent and determination with opportunities.</p>
+                <div class="hero-cta">
+                    <a href="teams.html" class="btn btn-primary">Meet Our Teams</a>
+                    <a href="about.html" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Fullscreen Overlay -->
+    <div class="video-fullscreen-overlay" id="videoFullscreenOverlay">
+        <button class="vfo-close" id="vfoClose" aria-label="Close video">&times;</button>
+        <video id="vfoVideo" playsinline>
+            <source src="https://archive.org/download/rosomain/rosomain.mp4" type="video/mp4">
+        </video>
+        <div class="vfo-controls">
+            <button class="vfo-btn" id="vfoBack">⟲ Back to Start</button>
+            <button class="vfo-btn" id="vfoSkipBack">−5s</button>
+            <button class="vfo-btn" id="vfoSkipForward">+5s</button>
+            <div class="vfo-volume">
+                <label for="vfoVolume" class="vfo-volume-label" aria-label="Volume">🔊</label>
+                <input type="range" id="vfoVolume" class="vfo-volume-slider" min="0" max="1" step="0.01" value="1">
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <h2>WHO WE ARE</h2>
+                <div class="header-line"></div>
+            </div>
+            <div class="about-content about-sides-layout">
+                <div class="about-side about-side-left">
+                    <div class="stat-item">
+                        <div class="stat-number">2025</div>
+                        <div class="stat-label">Founded</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">6+</div>
+                        <div class="stat-label">Teams</div>
+                    </div>
+                </div>
+                <div class="about-center">
+                    <div class="animated-logo-container">
+                        <div class="logo-bars">
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                        </div>
+                        <img src="roso-logo.png" alt="ROSO Logo" class="animated-logo">
+                        <div class="logo-bars right">
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                        </div>
+                    </div>
+                    <div class="about-center-text">
+                        <p class="about-reveal">We build teams, but more importantly, we forge champions. ROSO Esports finds raw talent and helps turn it into competitive excellence across the games that matter most.</p>
+                        <p class="about-reveal">The name ROSO comes from Rosoideae, a family of plants known for being resilient and beautiful. Like them, we believe in creating the right environment for talent to grow. Every player on our roster gets the coaching, resources, and platform they need to succeed.</p>
+                    </div>
+                </div>
+                <div class="about-side about-side-right">
+                    <div class="stat-item">
+                        <div class="stat-number">1000+</div>
+                        <div class="stat-label">Players</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">∞</div>
+                        <div class="stat-label">Potential</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Teams Section -->
+    <section id="teams" class="teams">
+        <div class="container">
+            <div class="section-header">
+                <h2>OUR TEAMS</h2>
+                <div class="header-line"></div>
+            </div>
+            <div class="teams-grid home-teams-grid">
+                <div id="valCardTrigger" class="team-card-link">
+                <div class="team-card">
+                    <div class="team-icon"><img src="assets/team-icons/valorant.png" alt="VALORANT Team Icon" class="team-icon-img"></div>
+                    <h3>VALORANT</h3>
+                    <p>Our flagship roster competing in the highest tier of competitive VALORANT.</p>
+                    <span class="team-link">View Roster →</span>
+                </div>
+                </div>
+                <a href="team-overwatch.html" class="team-card-link">
+                <div class="team-card">
+                    <div class="team-icon"><img src="assets/team-icons/overwatch.png" alt="OVERWATCH Team Icon" class="team-icon-img"></div>
+                    <h3>OVERWATCH</h3>
+                    <p>Elite team-based competition with strategic gameplay and coordination.</p>
+                    <span class="team-link">View Roster →</span>
+                </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- VALORANT Team Chooser Popup -->
+    <div class="val-chooser-overlay" id="valChooserOverlay">
+        <div class="val-chooser-popup">
+            <button class="val-chooser-close" id="valChooserClose">&times;</button>
+            <div class="val-chooser-icon">
+                <img src="assets/team-icons/valorant.png" alt="VALORANT" style="width: 80px; height: 80px;">
+            </div>
+            <h3 class="val-chooser-title">Choose Your Team</h3>
+            <p class="val-chooser-text">Select which VALORANT roster you'd like to view:</p>
+            <div class="val-chooser-buttons">
+                <a href="team-valorant.html" class="btn btn-primary val-chooser-btn">Main Roster</a>
+                <a href="team-valorant-gc.html" class="btn btn-secondary val-chooser-btn">Game Changers</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- News Section -->
+    <section id="news" class="news">
+        <div class="container">
+            <div class="section-header">
+                <h2>LATEST NEWS</h2>
+                <div class="header-line"></div>
+            </div>
+            <div class="news-grid">
+                <div class="news-card twitter-embed-card news-twitter-embed">
+                    <h3>LATEST FROM X</h3>
+                    <div class="twitter-embed-wrapper">
+                        <a class="twitter-timeline" data-theme="dark" data-chrome="noheader nofooter noborders transparent" data-height="600" href="https://twitter.com/RosoideaeGG">Posts by @RosoideaeGG</a>
+                        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                    </div>
+                </div>
+                <div class="news-card featured">
+                    <div class="news-image"></div>
+                    <div class="news-content">
+                        <span class="news-category">TBD</span>
+                        <h3>TBD</h3>
+                        <p>TBD</p>
+                        <span class="news-date">TBD</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section id="partners" class="partners">
+        <div class="container">
+            <div class="section-header">
+                <h2>OUR PARTNERS</h2>
+                <div class="header-line"></div>
+            </div>
+            <div class="partners-grid">
+                <div class="partner-logo">TBD</div>
+                <div class="partner-logo">TBD</div>
+                <div class="partner-logo">TBD</div>
+                <div class="partner-logo">TBD</div>
+                <div class="partner-logo">TBD</div>
+                <div class="partner-logo">TBD</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Discord Widget Section -->
+    <section id="discord" class="discord-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>JOIN OUR DISCORD</h2>
+                <div class="header-line"></div>
+            </div>
+            <div class="discord-widget-wrapper">
+                <iframe src="https://discord.com/widget?id=1378538482011471882&theme=dark" width="350" height="500" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts" style="border:none" title="Discord Widget"></iframe>
+                <div class="discord-cta">
+                    <h3>Be Part of the Community</h3>
+                    <p>Connect with fellow competitors, stay updated on matches, and hang out with the ROSO squad.</p>
+                    <a href="https://discord.gg/roso" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Join Discord</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact/Newsletter Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-content">
+                <h2>STAY CONNECTED</h2>
+                <p>Join our community and get the latest updates on teams, tournaments, and exclusive content.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                </form>
+                <div class="social-links">
+                    <a href="https://x.com/RosoideaeGG" class="social-icon" aria-label="Twitter" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" fill="currentColor"/></svg></a>
+                    <a href="https://www.instagram.com/roso.esports/" class="social-icon" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" fill="currentColor"/></svg></a>
+                    <a href="https://www.youtube.com/@RosoEsports" class="social-icon" aria-label="YouTube" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="currentColor"/></svg></a>
+                    <a href="https://www.twitch.tv/rosoesports" class="social-icon" aria-label="Twitch" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z" fill="currentColor"/></svg></a>
+                    <a href="https://www.tiktok.com/@rosoesports" class="social-icon" aria-label="TikTok" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z" fill="currentColor"/></svg></a>
+                    <a href="https://discord.gg/roso" class="social-icon" aria-label="Discord" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189z" fill="currentColor"/></svg></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator" id="scrollIndicator">
+        <span class="scroll-indicator-line"></span>
+        <span class="scroll-indicator-text">KEEP SCROLLING</span>
+        <span class="scroll-indicator-line"></span>
+        <svg class="scroll-indicator-arrow" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 4v16m0 0l-6-6m6 6l6-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>ROSO ESPORTS</h4>
+                    <p>Where Talent Blooms</p>
+                    <p class="footer-tagline">Awarding talent and determination with opportunities.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>QUICK LINKS</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="teams.html">Teams</a></li>
+                        <li><a href="news.html">News</a></li>
+                        <li><a href="partners.html">Partners</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>LEGAL</h4>
+                    <ul>
+                        <li><a href="legal.html">Privacy Policy</a></li>
+                        <li><a href="legal.html">Terms of Service</a></li>
+                        <li><a href="legal.html">Cookie Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>CONTACT</h4>
+                    <ul>
+                        <li><a href="mailto:info@rosoesports.com">info@rosoesports.com</a></li>
+                        <li><a href="contact.html">Press Inquiries</a></li>
+                        <li><a href="contact.html">Sponsorships</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 ROSO Esports. All rights reserved.</p>
+                <p class="built-by">Built By <a href="built-by-star.html" class="built-by-star">Star</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
 </body>
 </html>
