@@ -625,7 +625,7 @@ section {
 
 .team-card {
     background: linear-gradient(145deg, rgba(15, 15, 15, 0.9), rgba(30, 30, 30, 0.9));
-    padding: 3.5rem 2.5rem;
+    padding: 2rem 1.5rem;
     border-radius: 1.25rem;
     text-align: center;
     border: 1px solid rgba(255, 255, 255, 0.05);
@@ -635,6 +635,7 @@ section {
     align-items: center;
     justify-content: space-between;
     height: 100%;
+    min-height: 250px;
 }
 
 .team-card:hover {
@@ -646,22 +647,22 @@ section {
 }
 
 .team-icon {
-    font-size: 3rem;
-    margin-bottom: 1.5rem;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 120px; /* Extra space for visual breathing room around 110px image */
+    height: 90px;
 }
 
 .team-card h3 {
     font-family: 'Oswald', sans-serif;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: 700;
     margin-bottom: 1rem;
     color: var(--primary-red);
     text-shadow: var(--glow-red);
-    min-height: 2em; /* Ensures consistent height regardless of text length */
+    min-height: 2.5em;
 }
 
 .team-card p {
@@ -691,8 +692,8 @@ section {
 }
 
 .rosters-section .teams-grid .team-card-link {
-    flex: 1 1 180px;
-    max-width: 280px;
+    flex: 1 1 150px;
+    max-width: 220px;
 }
 
 /* ── Twitter Embed Card (Home Page) ── */
