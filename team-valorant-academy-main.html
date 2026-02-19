@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Academy Rosters - ROSO Esports</title>
+    <title>VALORANT Academy Roster - ROSO Esports</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="stylesheet" href="style.css">
@@ -74,34 +74,68 @@
         <div class="team-page-header">
             <img src="assets/team-icons/valorant.png" alt="VALORANT Team Icon" class="team-page-icon">
             <div>
-                <h1 class="page-title">Academy Rosters</h1>
-                <p class="page-subtitle">Select an Academy team to view their roster.</p>
+                <h1 class="page-title">Valorant Academy</h1>
+                <p class="page-subtitle">Academy roster for VALORANT.</p>
             </div>
         </div>
     </div>
 </section>
 
-<section class="communities-section">
+<section class="rosters-section">
     <div class="container">
-        <div class="community-block">
-            <div class="community-teams">
-                <a href="team-valorant-academy-main.html" class="community-team-card">
-                    <div class="team-card-content">
-                        <h3 class="team-name">Valorant Academy</h3>
-                        <p class="team-description">VALORANT Academy roster</p>
-                        <span class="team-arrow">→</span>
+        <div class="roster-panel" id="valorant-academy">
+            <div class="roster-panel-body">
+                <p class="player-hint">💡 Click on any player to view their bio and socials</p>
+                <h4>Players</h4>
+                <div class="rp-list">
+                    <div class="rp-entry rp-entry-card" data-name="Verify Redd" data-role="Flex/IGL" data-pfp="assets/pfp/verifyredd.jpg" data-bio="Flex and In-Game Leader for ROSO Esports VALORANT Academy.">
+                        <img src="assets/pfp/verifyredd.jpg" alt="Verify Redd" class="rp-pfp">
+                        <span class="rp-tag">Flex/IGL</span>
+                        <span class="rp-handle">Verify Redd</span>
                     </div>
-                </a>
-                <a href="team-valorant-gc-academy.html" class="community-team-card">
-                    <div class="team-card-content">
-                        <h3 class="team-name">GC Academy</h3>
-                        <p class="team-description">Game Changers Academy roster</p>
-                        <span class="team-arrow">→</span>
+                    <div class="rp-entry rp-entry-card" data-name="bbleu" data-role="Controller" data-pfp="assets/pfp/21.svg" data-bio="Controller for ROSO Esports VALORANT Academy.">
+                        <img src="assets/pfp/21.svg" alt="bbleu" class="rp-pfp">
+                        <span class="rp-tag">Controller</span>
+                        <span class="rp-handle">bbleu</span>
                     </div>
-                </a>
+                    <div class="rp-entry rp-entry-card" data-name="Ghan" data-role="Flex" data-pfp="assets/pfp/22.svg" data-bio="Flex player for ROSO Esports VALORANT Academy.">
+                        <img src="assets/pfp/22.svg" alt="Ghan" class="rp-pfp">
+                        <span class="rp-tag">Flex</span>
+                        <span class="rp-handle">Ghan</span>
+                    </div>
+                    <div class="rp-entry rp-entry-card" data-name="Ed" data-role="Senti" data-pfp="assets/pfp/23.svg" data-bio="Sentinel for ROSO Esports VALORANT Academy.">
+                        <img src="assets/pfp/23.svg" alt="Ed" class="rp-pfp">
+                        <span class="rp-tag">Senti</span>
+                        <span class="rp-handle">Ed</span>
+                    </div>
+                    <div class="rp-entry rp-entry-card" data-name="Sage" data-role="Duelist" data-pfp="assets/pfp/24.svg" data-bio="Duelist for ROSO Esports VALORANT Academy.">
+                        <img src="assets/pfp/24.svg" alt="Sage" class="rp-pfp">
+                        <span class="rp-tag">Duelist</span>
+                        <span class="rp-handle">Sage</span>
+                    </div>
+                </div>
+                <h4>Staff</h4>
+                <div class="rp-list">
+                    <div class="rp-entry rp-entry-card" data-name="Maui moon" data-role="Head Coach" data-pfp="assets/pfp/13.svg" data-bio="Head Coach for ROSO Esports VALORANT Academy.">
+                        <img src="assets/pfp/13.svg" alt="Maui moon" class="rp-pfp">
+                        <span class="rp-tag">Head Coach</span>
+                        <span class="rp-handle">Maui moon</span>
+                    </div>
+                    <div class="rp-entry rp-entry-card" data-name="Jelly" data-role="Assistant Coach" data-pfp="assets/pfp/14.svg" data-bio="Assistant Coach for ROSO Esports VALORANT Academy.">
+                        <img src="assets/pfp/14.svg" alt="Jelly" class="rp-pfp">
+                        <span class="rp-tag">Assistant Coach</span>
+                        <span class="rp-handle">Jelly</span>
+                    </div>
+                    <div class="rp-entry rp-entry-card" data-name="nUT" data-role="Manager" data-pfp="assets/pfp/15.svg" data-bio="Manager for ROSO Esports VALORANT Academy.">
+                        <img src="assets/pfp/15.svg" alt="nUT" class="rp-pfp">
+                        <span class="rp-tag">Manager</span>
+                        <span class="rp-handle">nUT</span>
+                    </div>
+                </div>
             </div>
         </div>
-        <a href="teams.html" class="btn btn-secondary">← Back to Teams</a>
+
+        <a href="team-valorant-academy.html" class="btn btn-secondary">← Back to Academy Rosters</a>
     </div>
 </section>
 
@@ -154,6 +188,18 @@
             </div>
         </div>
     </footer>
+
+    <!-- Player Profile Modal -->
+    <div class="player-modal-overlay" id="playerModalOverlay">
+        <div class="player-modal">
+            <button class="player-modal-close" id="playerModalClose">&times;</button>
+            <img src="" alt="" class="player-modal-pfp" id="playerModalPfp">
+            <h3 class="player-modal-name" id="playerModalName"></h3>
+            <span class="player-modal-role" id="playerModalRole"></span>
+            <p class="player-modal-bio" id="playerModalBio"></p>
+            <div class="player-modal-socials" id="playerModalSocials"></div>
+        </div>
+    </div>
 
     <script src="app.js"></script>
 </body>
