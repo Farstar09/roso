@@ -722,9 +722,106 @@ section {
     grid-template-columns: repeat(2, 1fr);
 }
 
+/* ── Home Teams Showcase (redesigned) ── */
+.home-teams-showcase {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+}
+
+.home-divisions-strip {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    width: 100%;
+    border: 1px solid rgba(220, 20, 60, 0.25);
+    border-radius: 1.5rem;
+    overflow: hidden;
+    background: linear-gradient(145deg, rgba(15, 15, 15, 0.95), rgba(25, 25, 25, 0.9));
+}
+
+.home-division-item {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+    padding: 3rem 3.5rem;
+    transition: background 0.3s ease;
+}
+
+.home-division-item:hover {
+    background: rgba(220, 20, 60, 0.06);
+}
+
+.home-division-sep {
+    width: 1px;
+    background: rgba(220, 20, 60, 0.3);
+    align-self: stretch;
+    margin: 1.5rem 0;
+}
+
+.home-division-logo-wrap {
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(220, 20, 60, 0.08);
+    border-radius: 1rem;
+    border: 1px solid rgba(220, 20, 60, 0.2);
+    padding: 0.6rem;
+}
+
+.home-division-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.home-division-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.home-division-name {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--text-primary);
+    line-height: 1;
+}
+
+.home-division-count {
+    color: var(--primary-red);
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+}
+
+@media (max-width: 640px) {
+    .home-divisions-strip {
+        flex-direction: column;
+    }
+    .home-division-sep {
+        width: auto;
+        height: 1px;
+        margin: 0 1.5rem;
+        align-self: stretch;
+    }
+    .home-division-item {
+        padding: 2rem 2rem;
+    }
+    .home-division-name {
+        font-size: 1.5rem;
+    }
+}
 
 
-/* News Section */
 .news {
     background: var(--surface-dark);
 }
@@ -3411,6 +3508,8 @@ section {
     width: 100%;
     height: 100%;
     object-fit: contain;
+    object-position: center center;
+    display: block;
 }
 
 .community-title {
